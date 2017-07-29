@@ -20,6 +20,11 @@
     "require-dev": {
         "phpunit/phpunit": "^6.2"
     },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
@@ -29,7 +34,7 @@
         "start": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit",
         "post-install-cmd": [
-            "cp config/config.php.example config/config.php"
+            "cp config/settings-local.php.example config/settings-local.php"
         ]
 	},
     "config": {

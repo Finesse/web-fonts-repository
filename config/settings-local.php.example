@@ -2,7 +2,7 @@
 
 /*
  * An example of settings that vary on different servers. To change the settings you should copy this file to
- * config/config.php and edit the file.
+ * config/settings-local.php and edit the file.
  */
 
 return [

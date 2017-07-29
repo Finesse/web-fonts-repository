@@ -2,7 +2,11 @@
 
 use Psr\Container\ContainerInterface;
 
-// DIC configuration
+/*
+ * DIC configuration
+ *
+ * Docs: https://www.slimframework.com/docs/concepts/di.html
+ */
 
 $container = $app->getContainer();
 
