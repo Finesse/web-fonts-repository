@@ -1,6 +1,6 @@
 <?php
 return [
-    'settings' => [
+    'settings' => array_merge_recursive([
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
 
@@ -15,5 +15,5 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
-    ],
+    ], require __DIR__ . '/../config/config.php'),
 ];
