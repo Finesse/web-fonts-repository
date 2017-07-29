@@ -5,16 +5,16 @@ use Psr\Http\Message\ResponseInterface;
 
 /*
  * Routes
+ *
+ * Docs: https://www.slimframework.com/docs/objects/router.html
  */
 
 // CSS generator
-$app->get('/css', function (RequestInterface $request, ResponseInterface $response) {
-
-})->setName('cssGenerator');
+$app->get('/css', \Src\Controllers\CSSGeneratorController::class)->setName('cssGenerator');
 
 // Index page
-$app->get('/', function (RequestInterface $request, ResponseInterface $response) {
+$app->get('/', function (RequestInterface $request, ResponseInterface $response) use ($app) {
     return $this->renderer->render($response, 'index.phtml', [
-        'cssApiUrl' => $app->get('router')
+        'cssApiUrl' => $app->getContainer()->get('router')->pathFor('cssGenerator')
     ]);
 });
