@@ -1,5 +1,5 @@
 <?php
-return array_merge_recursive([
+return array_replace_recursive([
     'displayErrorDetails' => true, // set to false in production
     'addContentLengthHeader' => false, // Allow the web server to send the content-length header
 
