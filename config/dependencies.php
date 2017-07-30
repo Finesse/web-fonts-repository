@@ -10,6 +10,14 @@ use Psr\Container\ContainerInterface;
 
 $container = $app->getContainer();
 
+// error handlers
+$container['phpErrorHandler'] = function (ContainerInterface $c) {
+    return new \Src\Handlers\PhpError($c->get('settings')['displayErrorDetails'], $c->get('logger'));
+};
+$container['errorHandler'] = function (ContainerInterface $c) {
+    return $c->get('phpErrorHandler');
+};
+
 // view renderer
 $container['renderer'] = function (ContainerInterface $c) {
     $settings = $c->get('settings')['renderer'];

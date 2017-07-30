@@ -7,7 +7,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Finesse",
+            "name": "Surgie Finesse",
             "email": "finesserus@gmail.com"
         }
     ],
@@ -15,6 +15,7 @@
         "php": ">=7.0",
         "slim/slim": "^3.1",
         "slim/php-view": "^2.0",
+        "psr/log": "^1.0",
         "monolog/monolog": "^1.17"
     },
     "require-dev": {
