@@ -2,3 +2,5 @@
 /logs/*
 !/logs/README.md
 /config/settings-local.php
+/public/fonts/*
+!/public/fonts/README.md

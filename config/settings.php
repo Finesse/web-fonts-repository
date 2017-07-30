@@ -14,4 +14,7 @@ return array_replace_recursive([
         'path' => __DIR__ . '/../logs/app.log',
         'level' => \Monolog\Logger::DEBUG,
     ],
+
+    // List of webfonts
+    'fonts' => [],
 ], require __DIR__ . '/settings-local.php');

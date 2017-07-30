@@ -32,3 +32,10 @@ $container['logger'] = function (ContainerInterface $c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
 };
+
+// webfonts css code generator
+$container['webfontCSSGenerator'] = function (ContainerInterface $c) {
+    $fonts = $c->get('settings')['fonts'];
+    $request = $c->get('request');
+    return new \Src\Services\WebfontCSSGenerator($fonts, $request->getUri()->getBasePath());
+};
