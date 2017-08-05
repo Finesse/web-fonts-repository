@@ -23,6 +23,5 @@ class CssGeneratorTest extends BaseTestCase
         $this->assertEquals(422, $this->runApp('GET', '/css?family=')->getStatusCode());
         $this->assertEquals(422, $this->runApp('GET', '/css?family=|Open+Sans:400,700')->getStatusCode());
         $this->assertEquals(422, $this->runApp('GET', '/css?family=:400,700')->getStatusCode());
-        $this->assertEquals(422, $this->runApp('GET', '/css?family=Open+Sans:foo')->getStatusCode());
     }
 }

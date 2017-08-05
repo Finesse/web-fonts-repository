@@ -5,7 +5,7 @@ namespace Src\Helpers;
 /**
  * Class CSSHelpers
  *
- * Helps functions for working with CSS code.
+ * Help functions for working with CSS code.
  *
  * @author Finesse
  * @package Src\Helpers

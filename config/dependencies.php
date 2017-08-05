@@ -37,5 +37,5 @@ $container['logger'] = function (ContainerInterface $c) {
 $container['webfontCSSGenerator'] = function (ContainerInterface $c) {
     $fonts = $c->get('settings')['fonts'];
     $request = $c->get('request');
-    return new \Src\Services\WebfontCSSGenerator($fonts, $request->getUri()->getBasePath());
+    return \Src\Services\WebfontCSSGenerator\WebfontCSSGenerator::createFromSettings($fonts, $request->getUri()->getBasePath());
 };

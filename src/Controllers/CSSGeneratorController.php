@@ -5,7 +5,8 @@ namespace Src\Controllers;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Src\Services\WebfontCSSGenerator;
+use Src\Services\WebfontCSSGenerator\Exceptions\InvalidSettingsException;
+use Src\Services\WebfontCSSGenerator\WebfontCSSGenerator;
 
 /**
  * Class CSSGeneratorController
@@ -52,7 +53,12 @@ class CSSGeneratorController
 
         // Generating the CSS code
         /** @var WebfontCSSGenerator $webfontCSSGenerator */
-        $webfontCSSGenerator = $this->container->get('webfontCSSGenerator');
+        try {
+            $webfontCSSGenerator = $this->container->get('webfontCSSGenerator');
+        } catch (InvalidSettingsException $error) {
+            $this->container->get('logger')->error($error);
+            return $this->createErrorResponse('The app settings are invalid: '.$error->getMessage(), 500);
+        }
         try {
             $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts);
         } catch (\InvalidArgumentException $error) {
@@ -60,6 +66,7 @@ class CSSGeneratorController
         }
 
         // Sending the response
+        // todo: Leverage HTTP cache
         return $response
             ->withHeader('Content-Type', 'text/css; charset=UTF-8')
             ->write($cssCode);
