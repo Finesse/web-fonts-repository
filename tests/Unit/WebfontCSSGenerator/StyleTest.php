@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\WebfontCSSGenerator;
 
-use PHPUnit\Framework\TestCase;
 use Src\Services\WebfontCSSGenerator\Exceptions\InvalidSettingsException;
 use Src\Services\WebfontCSSGenerator\Models\Style;
+use Tests\BaseTestCase;
 
-class StyleTest extends TestCase
+class StyleTest extends BaseTestCase
 {
     public function testIncorrectName()
     {

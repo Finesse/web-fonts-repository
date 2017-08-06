@@ -2,12 +2,12 @@
 
 namespace Tests\Unit\WebfontCSSGenerator;
 
-use PHPUnit\Framework\TestCase;
 use Src\Services\WebfontCSSGenerator\Exceptions\InvalidSettingsException;
 use Src\Services\WebfontCSSGenerator\Models\Family;
 use Src\Services\WebfontCSSGenerator\Models\Style;
+use Tests\BaseTestCase;
 
-class FamilyTest extends TestCase
+class FamilyTest extends BaseTestCase
 {
     public function testIncorrectDirectory()
     {

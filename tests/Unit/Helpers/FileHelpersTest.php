@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Helpers;
 
-use PHPUnit\Framework\TestCase;
 use Src\Helpers\FileHelpers;
+use Tests\BaseTestCase;
 
-class FileHelpersTest extends TestCase
+class FileHelpersTest extends BaseTestCase
 {
     public function testConcatPath()
     {

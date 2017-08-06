@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Helpers;
 
-use PHPUnit\Framework\TestCase;
 use Src\Helpers\CSSHelpers;
+use Tests\BaseTestCase;
 
-class CSSHelpersTest extends TestCase
+class CSSHelpersTest extends BaseTestCase
 {
     public function testFormatString()
     {

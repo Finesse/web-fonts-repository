@@ -2,7 +2,7 @@
 
 namespace Tests\Functional;
 
-class CssGeneratorTest extends BaseTestCase
+class CssGeneratorTest extends FunctionalTestCase
 {
     /**
      * Test that the route returns a CSS file response

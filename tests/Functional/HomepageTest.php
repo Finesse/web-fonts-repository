@@ -2,7 +2,7 @@
 
 namespace Tests\Functional;
 
-class HomepageTest extends BaseTestCase
+class HomepageTest extends FunctionalTestCase
 {
     /**
      * Test that the index route returns a rendered response

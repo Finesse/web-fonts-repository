@@ -2,11 +2,11 @@
 
 namespace Tests\Functional;
 
-use PHPUnit\Framework\TestCase;
 use Slim\App;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Http\Environment;
+use Tests\BaseTestCase;
 
 /**
  * This is an example class that shows how you could set up a method that
@@ -14,7 +14,7 @@ use Slim\Http\Environment;
  * tuned to the specifics of this app, so if your needs are
  * different, you'll need to change it.
  */
-class BaseTestCase extends TestCase
+class FunctionalTestCase extends BaseTestCase
 {
     /**
      * Use middleware when running application?
