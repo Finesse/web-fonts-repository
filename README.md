@@ -135,3 +135,18 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 ```
+
+
+## Versions compatibility
+
+The project follows the [Semantic Versioning](http://semver.org).
+
+It means that patch versions are fully compatible (i.e. 1.2.1 and 1.2.2), minor versions are backward compatible 
+(i.e. 1.2.1 and 1.3.2) and major versions are not compatible (i.e. 1.2.1 and 3.0).
+The pre-release versions (0.*) are a bit different: patch versions are backward compatible and minor versions are not 
+compatible.
+
+
+## License
+
+MIT. See [the LICENSE](LICENSE) file for details.
