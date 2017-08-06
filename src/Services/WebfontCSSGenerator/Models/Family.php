@@ -51,7 +51,7 @@ class Family
             throw new InvalidSettingsException('The $settings[directory] argument must be string or null, '.gettype($settings['directory']).' given.');
         }
         if (!is_array($settings['styles'] ?? null)) {
-            throw new InvalidSettingsException('The $settings[styles] argument must be array, '.gettype($settings['directory']).' given.');
+            throw new InvalidSettingsException('The $settings[styles] argument must be array, '.gettype($settings['styles'] ?? null).' given.');
         }
 
         $family = new static();

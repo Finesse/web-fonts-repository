@@ -25,7 +25,7 @@ class Style
     /**
      * @var bool Whether the style is italic.
      */
-    public $isItalic = true;
+    public $isItalic = false;
 
     /**
      * @var bool|null Should local font source be omitted in a CSS code. Null means that the value should be inherited
