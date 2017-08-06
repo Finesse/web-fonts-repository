@@ -25,8 +25,8 @@ class CSSHelpers
     public static function formatString(string $text): string
     {
         return "'".str_replace(
-            [  "'",   "\\",   "\n"],
-            ["\\'", "\\\\", "\\\n"],
+            [  "\\",   "'",   "\n"],
+            ["\\\\", "\\'", "\\\n"],
             $text
         )."'";
     }
