@@ -17,4 +17,7 @@ return array_replace_recursive([
 
     // List of webfonts
     'fonts' => [],
+
+    // How long should browsers keep generated CSS in cache (in seconds)
+    'cssHttpCacheAge' => 2678400,
 ], require __DIR__ . '/settings-local.php');

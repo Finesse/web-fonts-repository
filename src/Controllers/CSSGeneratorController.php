@@ -66,9 +66,17 @@ class CSSGeneratorController
         }
 
         // Sending the response
-        // todo: Leverage HTTP cache
+        $httpCacheTime = round($this->container->get('settings')['cssHttpCacheAge']);
+        if (!headers_sent()) {
+            // A dirty solution for this problem: https://stackoverflow.com/questions/39472944
+            // The problem is reported to the Slim developers here: https://github.com/slimphp/Slim/issues/2282
+            header_remove('Cache-Control');
+            header_remove('Pragma');
+        }
         return $response
             ->withHeader('Content-Type', 'text/css; charset=UTF-8')
+            ->withHeader('Cache-Control', $httpCacheTime > 0 ? 'max-age='.$httpCacheTime.', public' : 'no-cache')
+            ->withHeader('Pragma', $httpCacheTime > 0 ? 'public' : 'no-cache')
             ->write($cssCode);
     }
 

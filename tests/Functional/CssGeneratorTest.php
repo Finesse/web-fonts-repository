@@ -7,12 +7,14 @@ class CssGeneratorTest extends FunctionalTestCase
     /**
      * Test that the route returns a CSS file response
      */
-    public function testStatusAndContentType()
+    public function testHeaders()
     {
         $response = $this->runApp('GET', '/css?family=Open+Sans:400,700');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue((bool)preg_match('~^text/css(;|$)~', $response->getHeaderLine('Content-Type')));
+        $this->assertTrue($response->hasHeader('Cache-Control'));
+        $this->assertTrue($response->hasHeader('Pragma'));
     }
 
     /**
