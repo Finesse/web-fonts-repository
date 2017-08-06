@@ -20,10 +20,10 @@ A simple webfont hosting for your own server. Inspired by [Google Fonts](https:/
 Run the following code in the console:
 
 ```bash
-composer create-project finesse/web-fonts-repository project_path
+composer create-project finesse/web-fonts-repository webfonts
 ```
 
-Where `project_path` is the directory path where the project should be installed.
+Where `webfonts` is a path to a directory where the repository should be installed.
 
 Or you can make some things manually:
 
@@ -48,7 +48,7 @@ chmod 777 logs
 #### 3. Web server
 
 Make the directory `public` be the document root of the web server.
-Or just open [http://localhost/public](http://localhost/public) if you installed the project to the web server root.
+Or just open [http://localhost/public](http://localhost/public) if you installed the repository to the web server root.
 
 Make all the requests to not-existing files be handled by `public/index.php`. 
 If you use Apache, you don't have to do anything. 
@@ -100,7 +100,7 @@ return [
 ];
 ```
 
-The `fonts` array keys are the fonts names. The `styles` arrays keys are the styles names.
+The `fonts` array keys are the font families names. The `styles` arrays keys are the styles names.
 The numbers in the style names are the font weights, `i` stands for italic.
 
 The font file paths are given relative to the `public/fonts` directory. 
@@ -119,10 +119,10 @@ Add the `<link>` tag to the HTML code of the page on which you want to embed a f
 
 Where `http://web-fonts-repository.local` is the root URL of a web fonts repository.
 
-The required fonts are set the same way as on Google Fonts. Font families are divided by `|`, families styles
+The required fonts are specified the same way as on Google Fonts. Font families are divided by `|`, families styles
 are divided by `,`, family name is separated from styles list using `:`.
 
-You may omit the styles list. In this case the regular style (`400`) is be used.
+You may omit the styles list. In this case the regular style (`400`) is used.
 
 ```html
 <link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans" />

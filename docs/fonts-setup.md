@@ -29,7 +29,7 @@ return [
 ];
 ```
 
-The `fonts` array keys are the fonts names. The `styles` arrays keys are the styles names.
+The `fonts` array keys are the font families names. The `styles` arrays keys are the styles names.
 The numbers in the style names are the font weights, `i` stands for italic.
 
 The font file paths are given relative to the `public/fonts` directory. 
