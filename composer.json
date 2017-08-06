@@ -34,7 +34,7 @@
 	"scripts": {
         "start": "php -S 0.0.0.0:8080 -t public public/index.php",
         "test": "phpunit",
-        "post-install-cmd": [
+        "post-create-project-cmd": [
             "cp config/settings-local.php.example config/settings-local.php"
         ]
 	},
