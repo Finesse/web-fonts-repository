@@ -1,16 +1,14 @@
 # Web fonts repository
 
-A simple webfont hosting for your own server. Inspired by [Google Fonts](https://fonts.google.com).
-
-* Generates CSS on-the-go for embedding fonts on web pages.
-* Stores and distributes webfont files.
+A simple webfont hosting inspired by [Google Fonts](https://fonts.google.com).
+It runs on your server, stores and distributes webfont files and generates CSS on-the-go for embedding fonts on web pages.
 
 
 ## Quick start
 
 ### Requirements
 
-1. PHP ≥ 7.0
+1. HTTP server supporting PHP ≥ 7.0
 2. [Composer](https://getcomposer.org) (required for installation)
 
 ### Installation
@@ -27,7 +25,7 @@ Where `webfonts` is a path to a directory where the repository should be install
 
 Or you can make some things manually:
 
-1. Download [the source code from GitHub]((http://github.com/FinesseRus/web-fonts-repository/archive/master.zip)) and extract it.
+1. Download [the source code from GitHub](http://github.com/FinesseRus/web-fonts-repository/archive/master.zip) and extract it.
 2. Open a terminal and go to the source code root.
 3. Run in the console:
 	```bash
@@ -51,7 +49,7 @@ Make the directory `public` be the document root of the web server.
 Or just open [http://localhost/public](http://localhost/public) if you installed the repository to the web server root.
 
 Make all the requests to not-existing files be handled by `public/index.php`. 
-If you use Apache, you don't have to do anything. 
+If you use Apache, you don't have to do it, `public/.htaccess` does it for you. 
 
 ### Setup
 
@@ -111,7 +109,7 @@ You can find more examples and possibilities [here](docs/fonts-setup.md).
 
 ### Usage
 
-Add the `<link>` tag to the HTML code of the page on which you want to embed a font:
+Add a `<link>` tag to the HTML code of the page on which you want to embed a font:
 
 ```html
 <link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans:400,400i,700,700i|Roboto:300,400" />
