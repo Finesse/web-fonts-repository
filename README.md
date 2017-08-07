@@ -53,7 +53,8 @@ If you use Apache, you don't have to do it, `public/.htaccess` does it for you.
 
 ### Setup
 
-Put your font files to the `public/fonts` directory. You may separate them by subdirectories.
+Put your font files (woff, woff2, ttf, eot, svg) to the `public/fonts` directory. You may separate them by subdirectories.
+You can convert webfont files on [Transfonter](https://transfonter.org).
 
 All settings go to the file `config/settings-local.php`.
 If you don't have it, copy it from the file `config/settings-local.php.example`.
