@@ -48,15 +48,13 @@ chmod 777 logs
 Make the directory `public` be the document root of the web server.
 Or just open [http://localhost/public](http://localhost/public) if you installed the repository to the web server root.
 
-##### 3.1 Not Apache server
-
-Do it if your web server is not Apache.
-
-Make all the requests to not-existing files be handled by `public/index.php`.
+Make all the requests to not-existing files be handled by `public/index.php`. 
+If your server is Apache, it's already done.
 
 Make the server add the `Access-Control-Allow-Origin: *` HTTP-header to the font files. 
 Otherwise some browsers will reject using fonts from the repository.
-Use can do it using [this instruction](https://davidwalsh.name/cdn-fonts).
+If you use Apache make sure that the `mod_header.c` mod is on (to turn it on run the `a2enmod headers` command and restart the server).
+For nginx use [this instruction](https://davidwalsh.name/cdn-fonts).
 
 ### Setup
 
