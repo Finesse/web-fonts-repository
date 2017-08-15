@@ -8,3 +8,8 @@ RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
+
+# Some browsers require the special header
+<FilesMatch "\.(woff|woff2|ttf|eot|svg)$">
+	Header set Access-Control-Allow-Origin "*"
+</FilesMatch>

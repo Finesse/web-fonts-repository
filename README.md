@@ -48,8 +48,15 @@ chmod 777 logs
 Make the directory `public` be the document root of the web server.
 Or just open [http://localhost/public](http://localhost/public) if you installed the repository to the web server root.
 
-Make all the requests to not-existing files be handled by `public/index.php`. 
-If you use Apache, you don't have to do it, `public/.htaccess` does it for you. 
+##### 3.1 Not Apache server
+
+Do it if your web server is not Apache.
+
+Make all the requests to not-existing files be handled by `public/index.php`.
+
+Make the server add the `Access-Control-Allow-Origin: *` HTTP-header to the font files. 
+Otherwise some browsers will reject using fonts from the repository.
+Use can do it using [this instruction](https://davidwalsh.name/cdn-fonts).
 
 ### Setup
 
@@ -116,7 +123,7 @@ Add a `<link>` tag to the HTML code of the page on which you want to embed a fon
 <link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans:400,400i,700,700i|Roboto:300,400" />
 ```
 
-Where `http://web-fonts-repository.local` is the root URL of a web fonts repository.
+Where `http://web-fonts-repository.local` is the root URL of the installed web fonts repository.
 
 The required fonts are specified the same way as on Google Fonts. Font families are divided by `|`, families styles
 are divided by `,`, family name is separated from styles list using `:`.
