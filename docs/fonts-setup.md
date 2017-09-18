@@ -36,7 +36,7 @@ The font file paths are given relative to the `public/fonts` directory.
 The file paths are the [glob](https://en.wikipedia.org/wiki/Glob_(programming)) search patterns.
 It means that the repository should consider all files matching the pattern as font files.
 
-You may specify font files explicitly. It is faster on runtime because the repository don't have to scan directories.
+You may specify font files explicitly. It is faster on runtime because the repository doesn't have to scan the directories.
 
 ```php
 return [

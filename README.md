@@ -59,7 +59,7 @@ For nginx use [this instruction](https://davidwalsh.name/cdn-fonts).
 ### Setup
 
 Put your font files (woff, woff2, ttf, eot, svg) to the `public/fonts` directory. You may separate them by subdirectories.
-You can convert webfont files on [Transfonter](https://transfonter.org).
+You can convert webfont files using [Transfonter](https://transfonter.org).
 
 All settings go to the file `config/settings-local.php`.
 If you don't have it, copy it from the file `config/settings-local.php.example`.
@@ -73,7 +73,7 @@ Whether errors details should be sent to browser. Anyway errors are written to t
 
 #### `logger`/`level`
 
-How many messages should be logged to the file. The value is on of the `\Monolog\Logger` constants.
+How many messages should be logged to the file. The value is one of the `\Monolog\Logger` constants.
 You can read more about log levels [here](https://seldaek.github.io/monolog/doc/01-usage.html#log-levels).
 
 #### `fonts`
