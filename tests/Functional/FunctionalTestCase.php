@@ -33,6 +33,24 @@ class FunctionalTestCase extends BaseTestCase
      */
     public function runApp($requestMethod, $requestUri, $requestData = null)
     {
+        // Create an application instance
+        $app = $this->makeApp();
+
+        // Run the application
+        return $this->runSpecificApp($app, $requestMethod, $requestUri, $requestData);
+    }
+
+    /**
+     * Process the given application application given a request method and URI
+     *
+     * @param App $app application to run
+     * @param string $requestMethod the request method (e.g. GET, POST, etc.)
+     * @param string $requestUri the request URI
+     * @param array|object|null $requestData the request data
+     * @return \Slim\Http\Response
+     */
+    public function runSpecificApp(App $app, $requestMethod, $requestUri, $requestData = null)
+    {
         // Create a mock environment for testing with
         $environment = Environment::mock(
             [
@@ -52,6 +70,20 @@ class FunctionalTestCase extends BaseTestCase
         // Set up a response object
         $response = new Response();
 
+        // Process the application
+        $response = $app->process($request, $response);
+
+        // Return the response
+        return $response;
+    }
+
+    /**
+     * Creates an application instance.
+     *
+     * @return App
+     */
+    public function makeApp()
+    {
         // Use the application settings
         $settings = require __DIR__ . '/../../config/settings.php';
 
@@ -69,10 +101,6 @@ class FunctionalTestCase extends BaseTestCase
         // Register routes
         require __DIR__ . '/../../config/routes.php';
 
-        // Process the application
-        $response = $app->process($request, $response);
-
-        // Return the response
-        return $response;
+        return $app;
     }
 }

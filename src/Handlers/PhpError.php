@@ -41,4 +41,10 @@ class PhpError extends BasePhpError
         $this->logger->error($error);
         return parent::__invoke($request, $response, $error);
     }
+
+    /**
+     * {@inheritDoc}
+     * The error is already written to the log thus we don't need to write it again.
+     */
+    protected function writeToErrorLog($throwable) {}
 }

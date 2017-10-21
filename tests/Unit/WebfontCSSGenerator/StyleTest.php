@@ -11,15 +11,44 @@ class StyleTest extends BaseTestCase
     public function testIncorrectName()
     {
         $this->expectException(InvalidSettingsException::class);
+        $this->expectExceptionMessage('The style name `foo` has invalid format.');
         Style::createFromSettings('foo', 'font.*');
+    }
+
+    public function testIncorrectSettingsArgumentType()
+    {
+        $this->expectException(InvalidSettingsException::class);
+        $this->expectExceptionMessage('The $settings argument must be array or string, integer given.');
+        Style::createFromSettings('400', 12345);
     }
 
     public function testIncorrectDirectory()
     {
         $this->expectException(InvalidSettingsException::class);
+        $this->expectExceptionMessage('The $settings[directory] argument must be string or null, array given.');
         Style::createFromSettings('400', [
             'directory' => ['foo', 'bar'],
             'files' => 'font.*'
+        ]);
+    }
+
+    public function testIncorrectFilesSetting()
+    {
+        $this->expectException(InvalidSettingsException::class);
+        $this->expectExceptionMessage('The $settings[files] argument must be array or string, object given.');
+        Style::createFromSettings('400', [
+            'directory' => 'dir',
+            'files' => new \StdClass()
+        ]);
+    }
+
+    public function testIncorrectFileSettings()
+    {
+        $this->expectException(InvalidSettingsException::class);
+        $this->expectExceptionMessage('The $settings[files][0] argument must be array or string, boolean given.');
+        Style::createFromSettings('400', [
+            'directory' => 'dir',
+            'files' => [true, 'file']
         ]);
     }
 

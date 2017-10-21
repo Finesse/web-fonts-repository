@@ -7,6 +7,13 @@ use Tests\BaseTestCase;
 
 class WebfontCSSGeneratorTest extends BaseTestCase
 {
+    public function testInvalidFamilies()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Argument $families[0] expected to be a Family instance, string given.');
+        new WebfontCSSGenerator(['Open Sans', 'Roboto']);
+    }
+
     public function testMakeCSS()
     {
         $generator = WebfontCSSGenerator::createFromSettings([
@@ -60,6 +67,11 @@ class WebfontCSSGeneratorTest extends BaseTestCase
                     '700' => [
                         'files' => [
                             'roboto_bold.woff2'
+                        ]
+                    ],
+                    '900' => [
+                        'files' => [
+                            'roboto_extra_black' // A file without extension
                         ]
                     ]
                 ]
@@ -121,7 +133,7 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 }
         "), static::removeUnnecessaryCharsFromCSS($generator->makeCSS([
             'Open Sans' => ['400', '500'],
-            'Roboto' => ['400']
+            'Roboto' => ['400', '400', '900'] // Regular style two times
         ])));
     }
 }

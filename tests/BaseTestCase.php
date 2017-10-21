@@ -15,6 +15,15 @@ use PHPUnit\Framework\TestCase;
 class BaseTestCase extends TestCase
 {
     /**
+     * {@inheritDoc}
+     */
+    protected function tearDown()
+    {
+        parent::tearDown();
+        \Mockery::close();
+    }
+
+    /**
      * Removes unnecessary characters from CSS text for more convenient comparison.
      *
      * @param string $css
