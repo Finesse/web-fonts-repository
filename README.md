@@ -1,5 +1,12 @@
 # Web fonts repository
 
+[![Latest Stable Version](https://poser.pugx.org/finesse/web-fonts-repository/v/stable)](https://packagist.org/packages/finesse/web-fonts-repository)
+[![Total Downloads](https://poser.pugx.org/finesse/web-fonts-repository/downloads)](https://packagist.org/packages/finesse/web-fonts-repository)
+[![Build Status](https://php-eye.com/badge/finesse/web-fonts-repository/tested.svg)](https://travis-ci.org/FinesseRus/web-fonts-repository)
+[![Coverage Status](https://coveralls.io/repos/github/FinesseRus/web-fonts-repository/badge.svg?branch=master)](https://coveralls.io/github/FinesseRus/web-fonts-repository?branch=master)
+[![Dependency Status](https://www.versioneye.com/php/finesse:web-fonts-repository/badge)](https://www.versioneye.com/php/finesse:web-fonts-repository)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391/mini.png)](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391)
+
 A simple webfont hosting inspired by [Google Fonts](https://fonts.google.com).
 It runs on your server, stores and distributes webfont files and generates CSS on-the-go for embedding fonts on web pages.
 
