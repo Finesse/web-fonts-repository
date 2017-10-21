@@ -7,6 +7,7 @@ php:
 install:
     - composer install
     - composer require satooshi/php-coveralls --dev
+    - composer run-script post-create-project-cmd
 
 script:
     - ./vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
