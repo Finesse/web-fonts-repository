@@ -24,13 +24,10 @@ $container['renderer'] = function (ContainerInterface $c) {
     return new Slim\Views\PhpRenderer($settings['template_path']);
 };
 
-// monolog
+// logger
 $container['logger'] = function (ContainerInterface $c) {
     $settings = $c->get('settings')['logger'];
-    $logger = new Monolog\Logger($settings['name']);
-    $logger->pushProcessor(new Monolog\Processor\UidProcessor());
-    $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
-    return $logger;
+    return (new Apix\Log\Logger\File($settings['path']))->setMinLevel($settings['level']);
 };
 
 // webfonts css code generator

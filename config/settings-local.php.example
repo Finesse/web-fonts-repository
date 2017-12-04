@@ -8,7 +8,7 @@
 return [
     'displayErrorDetails' => true,
     'logger' => [
-        'level' => \Monolog\Logger::DEBUG
+        'level' => 'debug'
     ],
     'fonts' => [],
 ];

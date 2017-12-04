@@ -8,11 +8,10 @@ return array_replace_recursive([
         'template_path' => __DIR__ . '/../templates/',
     ],
 
-    // Monolog settings
+    // Logger settings
     'logger' => [
-        'name' => 'web-fonts-repository',
         'path' => __DIR__ . '/../logs/app.log',
-        'level' => \Monolog\Logger::DEBUG,
+        'level' => 'debug',
     ],
 
     // List of webfonts
