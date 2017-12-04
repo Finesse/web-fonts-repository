@@ -47,7 +47,11 @@ class WebfontCSSGenerator
     {
         foreach ($families as $index => $family) {
             if (!($family instanceof Family)) {
-                throw new \InvalidArgumentException('Argument $families['.$index.'] expected to be a Family instance, '.gettype($family).' given.');
+                throw new \InvalidArgumentException(sprintf(
+                    'Argument $families[%s] expected to be a Family instance, %s given.',
+                    $index,
+                    is_object($family) ? 'a '.get_class($family).' instance' : gettype($family)
+                ));
             }
 
             $this->families[$family->name] = $family;

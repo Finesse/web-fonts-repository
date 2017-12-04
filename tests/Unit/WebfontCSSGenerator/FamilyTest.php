@@ -9,22 +9,6 @@ use Tests\BaseTestCase;
 
 class FamilyTest extends BaseTestCase
 {
-    public function testIncorrectDirectory()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        Family::createFromSettings('test', [
-            'directory' => ['foo', 'bar']
-        ]);
-    }
-
-    public function testIncorrectStyles()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        Family::createFromSettings('test', [
-            'styles' => '1234'
-        ]);
-    }
-
     public function testCreateFromSettings()
     {
         $family = Family::createFromSettings('Foo bar', [
@@ -36,11 +20,13 @@ class FamilyTest extends BaseTestCase
                 '600' => 'font_semibold.*'
             ]
         ]);
-        $this->assertAttributeEquals('Foo bar', 'name', $family);
-        $this->assertAttributeEquals(true, 'forbidLocalSource', $family);
-        $this->assertAttributeEquals('example/dir', 'directory', $family);
-        $this->assertAttributeCount(3, 'styles', $family);
+        $this->assertAttributes([
+            'name' => 'Foo bar',
+            'forbidLocalSource' => true,
+            'directory' => 'example/dir'
+        ], $family);;
         $this->assertAttributeInternalType('array', 'styles', $family);
+        $this->assertAttributeCount(3, 'styles', $family);
         $this->assertArrayHasKey('400i', $family->styles);
         $this->assertInstanceOf(Style::class, $family->styles['400i']);
 
@@ -51,13 +37,29 @@ class FamilyTest extends BaseTestCase
                 '700' => 'font_bold.*'
             ]
         ]);
-        $this->assertAttributeEquals('Foo bar 2', 'name', $family);
-        $this->assertAttributeEquals(null, 'forbidLocalSource', $family);
-        $this->assertAttributeEquals(null, 'directory', $family);
-        $this->assertAttributeCount(3, 'styles', $family);
+        $this->assertAttributes([
+            'name' => 'Foo bar 2',
+            'forbidLocalSource' => null,
+            'directory' => null,
+        ], $family);
         $this->assertAttributeInternalType('array', 'styles', $family);
+        $this->assertAttributeCount(3, 'styles', $family);
         $this->assertArrayHasKey('700', $family->styles);
         $this->assertInstanceOf(Style::class, $family->styles['700']);
+
+        // Incorrect directory
+        $this->assertException(InvalidSettingsException::class, function () {
+            Family::createFromSettings('test', [
+                'directory' => ['foo', 'bar']
+            ]);
+        });
+
+        // Incorrect styles
+        $this->assertException(InvalidSettingsException::class, function () {
+            Family::createFromSettings('test', [
+                'styles' => '1234'
+            ]);
+        });
     }
 
     public function testGetStyle()

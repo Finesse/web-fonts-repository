@@ -7,11 +7,17 @@ use Tests\BaseTestCase;
 
 class WebfontCSSGeneratorTest extends BaseTestCase
 {
-    public function testInvalidFamilies()
+    public function testConstructor()
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument $families[0] expected to be a Family instance, string given.');
-        new WebfontCSSGenerator(['Open Sans', 'Roboto']);
+        // Invalid families
+        $this->assertException(\InvalidArgumentException::class, function () {
+            new WebfontCSSGenerator(['Open Sans', 'Roboto']);
+        }, function (\Throwable $exception) {
+            $this->assertEquals(
+                'Argument $families[0] expected to be a Family instance, string given.',
+                $exception->getMessage()
+            );
+        });
     }
 
     public function testMakeCSS()
@@ -78,7 +84,7 @@ class WebfontCSSGeneratorTest extends BaseTestCase
             ]
         ], '/generator');
 
-        $this->assertEquals(static::removeUnnecessaryCharsFromCSS("
+        $this->assertCSSEquals("
 @font-face {
 	font-family: 'Open Sans';
 	font-weight: 400;
@@ -105,12 +111,12 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-style: normal;
 	src: url('/generator/fonts/Roboto/roboto_bold.woff2') format('woff2');
 }
-        "), static::removeUnnecessaryCharsFromCSS($generator->makeCSS([
+        ", $generator->makeCSS([
             'Open Sans' => ['400', '400i', '700', '700i', '100', '200', '300', '800'],
             'Roboto' => ['400', '400i', '700', '700i']
-        ])));
+        ]));
 
-        $this->assertEquals(static::removeUnnecessaryCharsFromCSS("
+        $this->assertCSSEquals("
 @font-face {
 	font-family: 'Open Sans';
 	font-weight: 400;
@@ -131,9 +137,9 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-style: normal;
 	src: local('Roboto'), url('/generator/fonts/Roboto/roboto.woff2') format('woff2');
 }
-        "), static::removeUnnecessaryCharsFromCSS($generator->makeCSS([
+        ", $generator->makeCSS([
             'Open Sans' => ['400', '500'],
             'Roboto' => ['400', '400', '900'] // Regular style two times
-        ])));
+        ]));
     }
 }

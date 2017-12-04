@@ -8,50 +8,6 @@ use Tests\BaseTestCase;
 
 class StyleTest extends BaseTestCase
 {
-    public function testIncorrectName()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        $this->expectExceptionMessage('The style name `foo` has invalid format.');
-        Style::createFromSettings('foo', 'font.*');
-    }
-
-    public function testIncorrectSettingsArgumentType()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        $this->expectExceptionMessage('The $settings argument must be array or string, integer given.');
-        Style::createFromSettings('400', 12345);
-    }
-
-    public function testIncorrectDirectory()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        $this->expectExceptionMessage('The $settings[directory] argument must be string or null, array given.');
-        Style::createFromSettings('400', [
-            'directory' => ['foo', 'bar'],
-            'files' => 'font.*'
-        ]);
-    }
-
-    public function testIncorrectFilesSetting()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        $this->expectExceptionMessage('The $settings[files] argument must be array or string, object given.');
-        Style::createFromSettings('400', [
-            'directory' => 'dir',
-            'files' => new \StdClass()
-        ]);
-    }
-
-    public function testIncorrectFileSettings()
-    {
-        $this->expectException(InvalidSettingsException::class);
-        $this->expectExceptionMessage('The $settings[files][0] argument must be array or string, boolean given.');
-        Style::createFromSettings('400', [
-            'directory' => 'dir',
-            'files' => [true, 'file']
-        ]);
-    }
-
     public function testCreateFromSettings()
     {
         $style = Style::createFromSettings('500i', [
@@ -65,36 +21,98 @@ class StyleTest extends BaseTestCase
                 '\\subdir\\font_medium.svg'
             ]
         ]);
-        $this->assertAttributeEquals(500, 'weight', $style);
-        $this->assertAttributeEquals(true, 'isItalic', $style);
-        $this->assertAttributeEquals(false, 'forbidLocalSource', $style);
-        $this->assertAttributeEquals('style/directory', 'directory', $style);
-        $this->assertAttributeEquals([
-            'subdir/font_medium.eot',
-            'subdir/font_medium.ttf',
-            'subdir/font_medium.woff',
-            'subdir/font_medium.woff2',
-            'subdir/font_medium.svg'
-        ], 'filesList', $style);
-        $this->assertAttributeEquals(null, 'filesGlob', $style);
+        $this->assertAttributes([
+            'weight' => 500,
+            'isItalic' => true,
+            'forbidLocalSource' => false,
+            'directory' => 'style/directory',
+            'filesList' => [
+                'subdir/font_medium.eot',
+                'subdir/font_medium.ttf',
+                'subdir/font_medium.woff',
+                'subdir/font_medium.woff2',
+                'subdir/font_medium.svg'
+            ],
+            'filesGlob' => null
+        ], $style);
 
         $style = Style::createFromSettings(800, [
             'files' => '\\subdir\\font_heavy.*'
         ]);
-        $this->assertAttributeEquals(800, 'weight', $style);
-        $this->assertAttributeEquals(false, 'isItalic', $style);
-        $this->assertAttributeEquals(null, 'forbidLocalSource', $style);
-        $this->assertAttributeEquals(null, 'directory', $style);
-        $this->assertAttributeEquals([], 'filesList', $style);
-        $this->assertAttributeEquals('subdir/font_heavy.*', 'filesGlob', $style);
+        $this->assertAttributes([
+            'weight' => 800,
+            'isItalic' => false,
+            'forbidLocalSource' => null,
+            'directory' => null,
+            'filesList' => [],
+            'filesGlob' => 'subdir/font_heavy.*'
+        ], $style);
 
         $style = Style::createFromSettings('100i', 'subdir\\font_thin.*');
-        $this->assertAttributeEquals(100, 'weight', $style);
-        $this->assertAttributeEquals(true, 'isItalic', $style);
-        $this->assertAttributeEquals(null, 'forbidLocalSource', $style);
-        $this->assertAttributeEquals(null, 'directory', $style);
-        $this->assertAttributeEquals([], 'filesList', $style);
-        $this->assertAttributeEquals('subdir/font_thin.*', 'filesGlob', $style);
+        $this->assertAttributes([
+            'weight' => 100,
+            'isItalic' => true,
+            'forbidLocalSource' => null,
+            'directory' => null,
+            'filesList' => [],
+            'filesGlob' => 'subdir/font_thin.*'
+        ], $style);
+
+        // Incorrect name
+        $this->assertException(InvalidSettingsException::class, function () {
+            Style::createFromSettings('foo', 'font.*');
+        }, function (\Throwable $exception) {
+            $this->assertEquals('The style name `foo` has invalid format.', $exception->getMessage());
+        });
+
+        // Incorrect settings argument type
+        $this->assertException(InvalidSettingsException::class, function () {
+            Style::createFromSettings('400', 12345);
+        }, function (\Throwable $exception) {
+            $this->assertEquals(
+                'The $settings argument must be array or string, integer given.',
+                $exception->getMessage()
+            );
+        });
+
+        // Incorrect directory
+        $this->assertException(InvalidSettingsException::class, function () {
+            Style::createFromSettings('400', [
+                'directory' => ['foo', 'bar'],
+                'files' => 'font.*'
+            ]);
+        }, function (\Throwable $exception) {
+            $this->assertEquals(
+                'The $settings[directory] argument must be string or null, array given.',
+                $exception->getMessage()
+            );
+        });
+
+        // Incorrect files setting
+        $this->assertException(InvalidSettingsException::class, function () {
+            Style::createFromSettings('400', [
+                'directory' => 'dir',
+                'files' => new \StdClass()
+            ]);
+        }, function (\Throwable $exception) {
+            $this->assertEquals(
+                'The $settings[files] argument must be array or string, object given.',
+                $exception->getMessage()
+            );
+        });
+
+        // Incorrect file settings
+        $this->assertException(InvalidSettingsException::class, function () {
+            Style::createFromSettings('400', [
+                'directory' => 'dir',
+                'files' => [true, 'file']
+            ]);
+        }, function (\Throwable $exception) {
+            $this->assertEquals(
+                'The $settings[files][0] argument must be array or string, boolean given.',
+                $exception->getMessage()
+            );
+        });
     }
 
     public function testGetName()
@@ -136,13 +154,13 @@ class StyleTest extends BaseTestCase
                 'test-font.woff2',
                 'test-font.eot',
                 'test-font.svg'
-            ], $style->getFilesInDirectory($testDirectory), "\$canonicalize = true", $delta = 0.0, $maxDepth = 10, $canonicalize = true);
+            ], $style->getFilesInDirectory($testDirectory), '', 0.0, 10, true);
         } finally {
             @unlink($testDirectory.'/test-font.ttf');
             @unlink($testDirectory.'/test-font.woff2');
             @unlink($testDirectory.'/test-font.eot');
             @unlink($testDirectory.'/test-font.svg');
-            rmdir($testDirectory);
+            @rmdir($testDirectory);
         }
     }
 }
