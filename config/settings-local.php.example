@@ -8,7 +8,7 @@
 return [
     'displayErrorDetails' => true,
     'logger' => [
-        'level' => 'debug'
+        'level' => \Psr\Log\LogLevel::DEBUG
     ],
     'fonts' => [],
 ];

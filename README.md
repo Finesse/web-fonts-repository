@@ -83,8 +83,9 @@ Whether errors details should be sent to browser. Anyway errors are written to t
 
 #### `logger`/`level`
 
-How many messages should be logged to the file. The value is a minimum log level name, e.g. `'debug'`, `'error'`.
-You can read more about log levels [there](https://github.com/apix/log#log-levels).
+How many messages should be logged to the file.
+The value is one of the [`\Psr\Log\LogLevel`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) constants.
+You can read more about log levels [here](https://github.com/apix/log#log-levels).
 
 #### `fonts`
 

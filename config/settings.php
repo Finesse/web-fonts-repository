@@ -1,4 +1,5 @@
 <?php
+
 return array_replace_recursive([
     'displayErrorDetails' => true, // set to false in production
     'addContentLengthHeader' => false, // Allow the web server to send the content-length header
@@ -11,7 +12,7 @@ return array_replace_recursive([
     // Logger settings
     'logger' => [
         'path' => __DIR__ . '/../logs/app.log',
-        'level' => 'debug',
+        'level' => \Psr\Log\LogLevel::DEBUG,
     ],
 
     // List of webfonts
