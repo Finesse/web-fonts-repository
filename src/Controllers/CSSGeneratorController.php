@@ -77,6 +77,7 @@ class CSSGeneratorController
             ->withHeader('Content-Type', 'text/css; charset=UTF-8')
             ->withHeader('Cache-Control', $httpCacheTime > 0 ? 'max-age='.$httpCacheTime.', public' : 'no-cache')
             ->withHeader('Pragma', $httpCacheTime > 0 ? 'public' : 'no-cache')
+            ->withHeader('Access-Control-Allow-Origin', '*')
             ->write($cssCode);
     }
 
