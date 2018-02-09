@@ -34,13 +34,14 @@ class Family
     public $directory = null;
 
     /**
-     * @var Style[] List of available family styles. The array keys are the style names.
+     * @var Style[] List of available family styles. The array keys are the style identifiers.
      */
     public $styles = [];
 
     /**
      * Creates the class instance from a font family settings (see an example in the readme).
      *
+     * @param string $name Family name
      * @param mixed[] $settings Family settings data
      * @return static
      * @throws InvalidSettingsException
@@ -58,9 +59,9 @@ class Family
         $family->name = $name;
         $family->forbidLocalSource = isset($settings['forbidLocal']) ? (bool)$settings['forbidLocal'] : null;
         $family->directory = isset($settings['directory']) ? static::preparePath($settings['directory']) : null;
-        foreach ($settings['styles'] as $styleName => $styleSettings) {
-            $style = Style::createFromSettings($styleName, $styleSettings);
-            $family->styles[$style->getName()] = $style;
+        foreach ($settings['styles'] as $styleId => $styleSettings) {
+            $style = Style::createFromSettings($styleId, $styleSettings);
+            $family->styles[$style->getId()] = $style;
         }
 
         return $family;
@@ -69,12 +70,12 @@ class Family
     /**
      * Finds the font style of this family.
      *
-     * @param string $styleName The style name
+     * @param string $styleId The style identifier in format `[0-9]+i?`
      * @return Style|null
      */
-    public function getStyle(string $styleName)
+    public function getStyle(string $styleId)
     {
-        return $this->styles[$styleName] ?? null;
+        return $this->styles[$styleId] ?? null;
     }
 
     /**

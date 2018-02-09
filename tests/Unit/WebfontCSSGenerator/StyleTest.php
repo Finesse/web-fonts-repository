@@ -62,7 +62,7 @@ class StyleTest extends BaseTestCase
         $this->assertException(InvalidSettingsException::class, function () {
             Style::createFromSettings('foo', 'font.*');
         }, function (\Throwable $exception) {
-            $this->assertEquals('The style name `foo` has invalid format.', $exception->getMessage());
+            $this->assertEquals('The style identifier `foo` has invalid format.', $exception->getMessage());
         });
 
         // Incorrect settings argument type
@@ -115,20 +115,39 @@ class StyleTest extends BaseTestCase
         });
     }
 
-    public function testGetName()
+    public function testGetId()
     {
         $style = new Style();
         $style->weight = 300;
         $style->isItalic = true;
-        $this->assertEquals('300i', $style->getName());
+        $this->assertEquals('300i', $style->getId());
 
         $style = new Style();
         $style->weight = 500;
         $style->isItalic = false;
-        $this->assertEquals('500', $style->getName());
+        $this->assertEquals('500', $style->getId());
 
         $style = new Style();
-        $this->assertEquals('400', $style->getName());
+        $this->assertEquals('400', $style->getId());
+    }
+
+    public function testGetName()
+    {
+        $style = new Style();
+        $this->assertEquals('Regular', $style->getName());
+
+        $style = new Style();
+        $style->isItalic = true;
+        $this->assertEquals('Italic', $style->getName());
+
+        $style = new Style();
+        $style->weight = 200;
+        $this->assertEquals('ExtraLight', $style->getName());
+
+        $style = new Style();
+        $style->weight = 450;
+        $style->isItalic = true;
+        $this->assertEquals('450 Italic', $style->getName());
     }
 
     public function testGetFilesInDirectory()

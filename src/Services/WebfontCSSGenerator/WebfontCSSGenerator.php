@@ -175,7 +175,9 @@ class WebfontCSSGenerator
         // Building CSS code
         $sources = [];
         if (!($style->forbidLocalSource ?? $family->forbidLocalSource ?? false)) {
-            $sources[] = "local(".CSSHelpers::formatString($family->name).")";
+            foreach ($this->getLocalFontNames($family, $style) as $name) {
+                $sources[] = "local(" . CSSHelpers::formatString($name) . ")";
+            }
         }
         if (isset($files['eot'])) {
             $sources[] = "url(".CSSHelpers::formatString($files['eot'].'?#iefix').") format('embedded-opentype')";
@@ -203,9 +205,31 @@ class WebfontCSSGenerator
     }
 
     /**
-     * Gets URLs of font style.
+     * Gets the local names of a font style.
      *
      * @param Family $family The styles family
+     * @param Style $style The font style
+     * @return string[]
+     */
+    protected function getLocalFontNames(Family $family, Style $style): array
+    {
+        $words = array_filter([
+            $family->name,
+            $style->getName()
+        ], 'strlen');
+
+        return array_unique([
+            implode(' ', $words),
+            implode('-', array_map(function ($word) {
+                return str_replace(' ', '', $word);
+            }, $words))
+        ]);
+    }
+
+    /**
+     * Gets URLs of font style.
+     *
+     * @param Family $family The style family
      * @param Style $style The font style
      * @return string[] List of URLs
      */

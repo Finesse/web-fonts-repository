@@ -73,6 +73,6 @@ class FamilyTest extends BaseTestCase
         ]);
         $this->assertInstanceOf(Style::class, $family->getStyle('600'));
         $this->assertEquals(null, $family->getStyle('300'));
-        $this->assertEquals('400i', $family->getStyle('400i')->getName());
+        $this->assertEquals('400i', $family->getStyle('400i')->getId());
     }
 }

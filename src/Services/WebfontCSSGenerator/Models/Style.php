@@ -18,6 +18,26 @@ use Src\Services\WebfontCSSGenerator\Exceptions\InvalidSettingsException;
 class Style
 {
     /**
+     * Weights names.
+     */
+    const WEIGHTS_NAMES = [
+        100 => 'Thin',
+        200 => 'ExtraLight',
+        300 => 'Light',
+        400 => 'Regular',
+        500 => 'Medium',
+        600 => 'SemiBold',
+        700 => 'Bold',
+        800 => 'ExtraBold',
+        900 => 'Black'
+    ];
+
+    /**
+     * A word for a style name which denotes that the style is italic
+     */
+    const ITALIC_WORD = 'Italic';
+
+    /**
      * @var int Style weight.
      */
     public $weight = 400;
@@ -52,15 +72,15 @@ class Style
     /**
      * Creates the class instance from a font style settings (see an example in the readme).
      *
-     * @param string $name Style name. Must have format `[0-9]+i?`.
+     * @param string $id Style identifier. Must have format `[0-9]+i?`.
      * @param string|mixed[] $settings Style settings data
      * @return static
      * @throws InvalidSettingsException
      */
-    public static function createFromSettings(string $name, $settings): self
+    public static function createFromSettings(string $id, $settings): self
     {
-        if (!preg_match('/^([0-9]+)(i?)$/i', $name, $matches)) {
-            throw new InvalidSettingsException("The style name `$name` has invalid format.");
+        if (!preg_match('/^([0-9]+)(i?)$/i', $id, $matches)) {
+            throw new InvalidSettingsException("The style identifier `$id` has invalid format.");
         }
         if (isset($settings['directory']) && !is_string($settings['directory'])) {
             throw new InvalidSettingsException('The $settings[directory] argument must be string or null, '.gettype($settings['directory']).' given.');
@@ -98,9 +118,27 @@ class Style
     /**
      * @return string The style name in format `[0-9]+i?`
      */
-    public function getName(): string
+    public function getId(): string
     {
         return $this->weight . ($this->isItalic ? 'i' : '');
+    }
+
+    /**
+     * @return string The style name for human (e.g. `Madium Italic`). May be an empty string.
+     */
+    public function getName(): string
+    {
+        $words = [];
+
+        if (!($this->weight === 400 && $this->isItalic)) {
+            $words[] = static::WEIGHTS_NAMES[$this->weight] ?? $this->weight;
+        }
+
+        if ($this->isItalic && $this) {
+            $words[] = static::ITALIC_WORD;
+        }
+
+        return implode(' ', $words);
     }
 
     /**
