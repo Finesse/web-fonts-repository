@@ -99,6 +99,8 @@ e.g. `Open Sans Medium Italic`. The default font weights names are:
 - 800 `ExtraBold`
 - 900 `Black`
 
+The regular italic style name is just `Italic`.
+
 You can change a font name by using the `name` parameter of a style:
 
 ```php
