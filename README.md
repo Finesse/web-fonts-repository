@@ -35,13 +35,13 @@ Or you can make some things manually:
 1. Download [the source code from GitHub](http://github.com/FinesseRus/web-fonts-repository/archive/master.zip) and extract it.
 2. Open a terminal and go to the source code root.
 3. Install the libraries by running in the terminal:
-	```bash
-	composer install
-	```
+    ```bash
+    composer install
+    ```
 4. Prepare the repository by running in the terminal:
-	```bash
-	composer run-script post-create-project-cmd
-	```
+    ```bash
+    composer run-script post-create-project-cmd
+    ```
 
 #### 2. File permissions
 

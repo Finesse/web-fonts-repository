@@ -49,12 +49,13 @@ class WebfontCSSGeneratorTest extends BaseTestCase
                         ]
                     ],
                     '500' => [
+                        'name' => 'DemiBold',
                         'files' => [
-                            'opensans_medium.eot',
-                            'opensans_medium.ttf',
-                            'opensans_medium.woff',
-                            'opensans_medium.woff2',
-                            'opensans_medium.svg'
+                            'opensans_demi.eot',
+                            'opensans_demi.ttf',
+                            'opensans_demi.woff',
+                            'opensans_demi.woff2',
+                            'opensans_demi.svg'
                         ]
                     ]
                 ]
@@ -128,8 +129,8 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-family: 'Open Sans';
 	font-weight: 500;
 	font-style: normal;
-	src: url('/generator/fonts/OpenSans/opensans_medium.eot');
-	src: local('Open Sans Medium'), local('OpenSans-Medium'), url('/generator/fonts/OpenSans/opensans_medium.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_medium.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_medium.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_medium.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_medium.svg#webfontregular') format('svg');
+	src: url('/generator/fonts/OpenSans/opensans_demi.eot');
+	src: local('Open Sans DemiBold'), local('OpenSans-DemiBold'), url('/generator/fonts/OpenSans/opensans_demi.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_demi.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_demi.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_demi.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_demi.svg#webfontregular') format('svg');
 }
 @font-face {
 	font-family: 'Roboto';

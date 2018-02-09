@@ -46,9 +46,9 @@ return [
             'styles' => [
                 '300' => [
                     'files' => [
-                    	'OpenSans/opensans-light.woff2',
-                    	'OpenSans/opensans-light.woff',
-                    	'OpenSans/opensans-light.ttf'
+                        'OpenSans/opensans-light.woff2',
+                        'OpenSans/opensans-light.woff',
+                        'OpenSans/opensans-light.ttf'
                     ]
                 ]
             ]
@@ -80,7 +80,26 @@ return [
 ];
 ```
 
-You can forbid using the `Local` source for the `src` value of the `@font-face` CSS rule by using the `forbidLocal` parameter:
+You can change the font name of the `local` source of the `src` value of a `@font-face` CSS rule by using the `name`
+parameter of a style:
+
+```php
+return [
+    // ...
+    'fonts' => [
+        'Open Sans' => [
+            'styles' => [
+                '500' => [
+                    'name' => 'DemiBold',	// The `local` names are `Open Sans Demibold` and `OpenSans-DemiBold`
+                    'files' => 'opensans_demibold.*'
+                ]
+            ]
+        ]
+    ]
+];
+```
+
+You can forbid using a `local` source by using the `forbidLocal` parameter:
 
 ```php
 return [

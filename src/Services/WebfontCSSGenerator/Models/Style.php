@@ -54,6 +54,11 @@ class Style
     public $forbidLocalSource = null;
 
     /**
+     * @var string|null Style name (e.g. `Black Italic`). If null, produced automatically.
+     */
+    public $name = null;
+
+    /**
      * @var string|null Directory of the style font files relative to the fonts directory. Doesn't have slashes at the
      * begin or at the end. Reverse slashes are replaced with direct slashes.
      */
@@ -89,6 +94,7 @@ class Style
         $style = new static();
         $style->weight = (int)$matches[1];
         $style->isItalic = (bool)$matches[2];
+        $style->name = isset($settings['name']) ? (string)$settings['name'] : null;
         $style->forbidLocalSource = isset($settings['forbidLocal']) ? (bool)$settings['forbidLocal'] : null;
         $style->directory = isset($settings['directory']) ? static::preparePath($settings['directory']) : null;
 
@@ -124,10 +130,14 @@ class Style
     }
 
     /**
-     * @return string The style name for human (e.g. `Madium Italic`). May be an empty string.
+     * @return string The style name for human (e.g. `Medium Italic`). May be an empty string.
      */
     public function getName(): string
     {
+        if ($this->name !== null) {
+            return $this->name;
+        }
+
         $words = [];
 
         if (!($this->weight === 400 && $this->isItalic)) {

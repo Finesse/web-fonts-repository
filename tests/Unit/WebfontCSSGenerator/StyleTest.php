@@ -11,6 +11,7 @@ class StyleTest extends BaseTestCase
     public function testCreateFromSettings()
     {
         $style = Style::createFromSettings('500i', [
+            'name' => 'Medium Italic',
             'forbidLocal' => false,
             'directory' => '\\style\\directory\\',
             'files' => [
@@ -24,6 +25,7 @@ class StyleTest extends BaseTestCase
         $this->assertAttributes([
             'weight' => 500,
             'isItalic' => true,
+            'name' => 'Medium Italic',
             'forbidLocalSource' => false,
             'directory' => 'style/directory',
             'filesList' => [
@@ -42,6 +44,7 @@ class StyleTest extends BaseTestCase
         $this->assertAttributes([
             'weight' => 800,
             'isItalic' => false,
+            'name' => null,
             'forbidLocalSource' => null,
             'directory' => null,
             'filesList' => [],
@@ -52,6 +55,7 @@ class StyleTest extends BaseTestCase
         $this->assertAttributes([
             'weight' => 100,
             'isItalic' => true,
+            'name' => null,
             'forbidLocalSource' => null,
             'directory' => null,
             'filesList' => [],
@@ -148,6 +152,12 @@ class StyleTest extends BaseTestCase
         $style->weight = 450;
         $style->isItalic = true;
         $this->assertEquals('450 Italic', $style->getName());
+
+        $style = new Style();
+        $style->weight = 500;
+        $style->isItalic = true;
+        $style->name = 'QuarterBold Oblique';
+        $this->assertEquals('QuarterBold Oblique', $style->getName());
     }
 
     public function testGetFilesInDirectory()
