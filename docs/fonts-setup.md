@@ -1,4 +1,4 @@
-## How to setup webfonts list
+# How to setup webfonts list
 
 All settings go to the file `config/settings-local.php`.
 If you don't have it, copy it from the file `config/settings-local.php.example`.
@@ -31,6 +31,9 @@ return [
 
 The `fonts` array keys are the font families names. The `styles` arrays keys are the styles names.
 The numbers in the style names are the font weights, `i` stands for italic.
+
+
+## Font files
 
 The font file paths are given relative to the `public/fonts` directory. 
 The file paths are the [glob](https://en.wikipedia.org/wiki/Glob_(programming)) search patterns.
@@ -80,8 +83,23 @@ return [
 ];
 ```
 
-You can change the font name of the `local` source of the `src` value of a `@font-face` CSS rule by using the `name`
-parameter of a style:
+
+## Local font names
+
+By default font names for the `local` source of the `src` value of a `@font-face` CSS rule are generated automatically, 
+e.g. `Open Sans Medium Italic`. The default font weights names are:
+
+- 100 `Thin`
+- 200 `ExtraLight`
+- 300 `Light`
+- 400 `Regular`
+- 500 `Medium`
+- 600 `SemiBold`
+- 700 `Bold`
+- 800 `ExtraBold`
+- 900 `Black`
+
+You can change a font name by using the `name` parameter of a style:
 
 ```php
 return [
@@ -89,9 +107,9 @@ return [
     'fonts' => [
         'Open Sans' => [
             'styles' => [
-                '500' => [
-                    'name' => 'DemiBold',	// The `local` names are `Open Sans Demibold` and `OpenSans-DemiBold`
-                    'files' => 'opensans_demibold.*'
+                '500i' => [
+                    'name' => 'DemiBold Oblique',	// The `local` names are `Open Sans Demibold Oblique` and `OpenSans-DemiBoldOblique`
+                    'files' => 'opensans_demibold_oblique.*'
                 ]
             ]
         ]
