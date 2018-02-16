@@ -47,9 +47,10 @@ Or you can make some things manually:
 
 Give the user behalf which the web server runs permissions to write inside the `logs` directory.
 
-You can just run this in the console (it is not OK in production):
+You can just run this in the console:
 
 ```bash
+# Don't do it in production!
 chmod 777 logs
 ```
 
