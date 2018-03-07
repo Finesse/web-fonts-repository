@@ -64,8 +64,9 @@ If your server is Apache, it's already done.
 
 Make the server add the `Access-Control-Allow-Origin: *` HTTP-header to the font files. 
 Otherwise some browsers will reject using fonts from the repository.
-If you use Apache make sure that the `mod_header.c` mod is on (to turn it on run the `a2enmod headers` command and restart the server).
-For nginx use [this instruction](https://davidwalsh.name/cdn-fonts).
+* Apache: all you need to do is to make sure that the `mod_header.c` module is on
+  (run the `a2enmod headers` command and restart the server to turn it on).
+* Nginx: use [this instruction](https://davidwalsh.name/cdn-fonts).
 
 ### Setup
 
@@ -133,7 +134,7 @@ Add a `<link>` tag to the HTML code of the page on which you want to embed a fon
 <link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans:400,400i,700,700i|Roboto:300,400" />
 ```
 
-Where `http://web-fonts-repository.local` is the root URL of the installed web fonts repository.
+Where `http://web-fonts-repository.local` is the root URL of an installed web fonts repository.
 
 The required fonts are specified the same way as on Google Fonts. Font families are divided by `|`, families styles
 are divided by `,`, family name is separated from styles list using `:`.
