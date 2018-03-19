@@ -1,8 +1,8 @@
 {
     "name": "finesse/web-fonts-repository",
     "type": "project",
-    "description": "A simple Google Fonts alternative for your own fonts",
-    "keywords": ["webfonts", "font", "google-fonts", "css"],
+    "description": "A simple webfont hosting. Google Fonts alternative for your own fonts.",
+    "keywords": ["webfonts", "font", "css", "hosting", "repository", "Google Fonts"],
     "homepage": "https://github.com/FinesseRus/web-fonts-repository",
     "license": "MIT",
     "authors": [
