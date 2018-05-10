@@ -3,8 +3,8 @@
 [![Latest Stable Version](https://poser.pugx.org/finesse/web-fonts-repository/v/stable)](https://packagist.org/packages/finesse/web-fonts-repository)
 [![Total Downloads](https://poser.pugx.org/finesse/web-fonts-repository/downloads)](https://packagist.org/packages/finesse/web-fonts-repository)
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/finesse/web-fonts-repository.svg)
-[![Build Status](https://travis-ci.org/FinesseRus/web-fonts-repository.svg?branch=master)](https://travis-ci.org/FinesseRus/web-fonts-repository)
-[![Coverage Status](https://coveralls.io/repos/github/FinesseRus/web-fonts-repository/badge.svg?branch=master)](https://coveralls.io/github/FinesseRus/web-fonts-repository?branch=master)
+[![Build Status](https://travis-ci.org/Finesse/web-fonts-repository.svg?branch=master)](https://travis-ci.org/Finesse/web-fonts-repository)
+[![Coverage Status](https://coveralls.io/repos/github/Finesse/web-fonts-repository/badge.svg?branch=master)](https://coveralls.io/github/Finesse/web-fonts-repository?branch=master)
 [![Dependency Status](https://www.versioneye.com/php/finesse:web-fonts-repository/badge)](https://www.versioneye.com/php/finesse:web-fonts-repository)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391/mini.png)](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391)
 
@@ -33,7 +33,7 @@ Where `webfonts` is a path to a directory where the repository should be install
 
 Or you can make some things manually:
 
-1. Download [the source code from GitHub](http://github.com/FinesseRus/web-fonts-repository/archive/master.zip) and extract it.
+1. Download [the source code from GitHub](http://github.com/Finesse/web-fonts-repository/archive/master.zip) and extract it.
 2. Open a terminal and go to the source code root.
 3. Install the libraries by running in the terminal:
     ```bash
