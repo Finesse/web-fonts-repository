@@ -8,7 +8,7 @@
 [![Dependency Status](https://www.versioneye.com/php/finesse:web-fonts-repository/badge)](https://www.versioneye.com/php/finesse:web-fonts-repository)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391/mini.png)](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391)
 
-A simple webfont hosting inspired by [Google Fonts](https://fonts.google.com).
+A simple webfont hosting inspired by [Google Fonts](http://fonts.google.com).
 It runs on your server, stores and distributes webfont files and generates CSS on-the-go for embedding fonts on web pages.
 
 
@@ -17,7 +17,7 @@ It runs on your server, stores and distributes webfont files and generates CSS o
 ### Requirements
 
 1. HTTP server supporting PHP ≥ 7.0
-2. [Composer](https://getcomposer.org) (required for installation)
+2. [Composer](http://getcomposer.org) (required for installation)
 
 ### Installation
 
@@ -67,12 +67,12 @@ Make the server add the `Access-Control-Allow-Origin: *` HTTP-header to the font
 Otherwise some browsers will reject using fonts from the repository.
 * Apache: all you need to do is to make sure that the `mod_header.c` module is on
   (run the `a2enmod headers` command and restart the server to turn it on).
-* Nginx: use [this instruction](https://davidwalsh.name/cdn-fonts).
+* Nginx: use [this instruction](http://davidwalsh.name/cdn-fonts).
 
 ### Setup
 
 Put your font files (woff, woff2, ttf, eot, svg) to the `public/fonts` directory. You may separate them by subdirectories.
-You can convert webfont files using [Transfonter](https://transfonter.org).
+You can convert webfont files using [Transfonter](http://transfonter.org).
 
 All settings go to the file `config/settings-local.php`.
 If you don't have it, copy it from the file `config/settings-local.php.example`.
@@ -87,8 +87,8 @@ Whether errors details should be sent to browser. Anyway errors are written to t
 #### `logger`/`level`
 
 How many messages should be logged to the file.
-The value is one of the [`\Psr\Log\LogLevel`](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) constants.
-You can read more about log levels [here](https://github.com/apix/log#log-levels).
+The value is one of the [`\Psr\Log\LogLevel`](http://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#5-psrlogloglevel) constants.
+You can read more about log levels [here](http://github.com/apix/log#log-levels).
 
 #### `fonts`
 
@@ -122,7 +122,7 @@ The `fonts` array keys are the font families names. The `styles` arrays keys are
 The numbers in the style names are the font weights, `i` stands for italic.
 
 The font file paths are given relative to the `public/fonts` directory. 
-The file paths are the [glob](https://en.wikipedia.org/wiki/Glob_(programming)) search patterns.
+The file paths are the [glob](http://en.wikipedia.org/wiki/Glob_(programming)) search patterns.
 It means that the repository should consider all files matching the pattern as font files.
 
 You can find more examples and possibilities [here](docs/fonts-setup.md).
