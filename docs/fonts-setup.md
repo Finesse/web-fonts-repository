@@ -110,7 +110,7 @@ return [
         'Open Sans' => [
             'styles' => [
                 '500i' => [
-                    'name' => 'DemiBold Oblique',	// The `local` names are `Open Sans Demibold Oblique` and `OpenSans-DemiBoldOblique`
+                    'name' => 'DemiBold Oblique',	// The `local` names are `Open Sans DemiBold Oblique` and `OpenSans-DemiBoldOblique`
                     'files' => 'opensans_demibold_oblique.*'
                 ]
             ]

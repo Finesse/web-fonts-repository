@@ -144,7 +144,7 @@ class Style
             $words[] = static::WEIGHTS_NAMES[$this->weight] ?? $this->weight;
         }
 
-        if ($this->isItalic && $this) {
+        if ($this->isItalic) {
             $words[] = static::ITALIC_WORD;
         }
 
