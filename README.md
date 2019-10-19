@@ -3,7 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/finesse/web-fonts-repository/v/stable)](https://packagist.org/packages/finesse/web-fonts-repository)
 [![Total Downloads](https://poser.pugx.org/finesse/web-fonts-repository/downloads)](https://packagist.org/packages/finesse/web-fonts-repository)
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/finesse/web-fonts-repository.svg)
-[![Build Status](https://travis-ci.org/Finesse/web-fonts-repository.svg?branch=master)](https://travis-ci.org/Finesse/web-fonts-repository)
+[![Test Status](https://github.com/finesse/web-fonts-repository/workflows/Test/badge.svg)](https://github.com/Finesse/web-fonts-repository/actions?workflow=Test)
 [![Maintainability](https://api.codeclimate.com/v1/badges/db0fe71d28df4626145f/maintainability)](https://codeclimate.com/github/Finesse/web-fonts-repository/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/db0fe71d28df4626145f/test_coverage)](https://codeclimate.com/github/Finesse/web-fonts-repository/test_coverage)
 
