@@ -7,6 +7,11 @@ php:
     - nightly
     - hhvm
 
+env:
+    global:
+        # Get it on https://codeclimate.com/repos/{repo id}/settings/test_reporter
+        - CC_TEST_REPORTER_ID=02c359b52f053b695269f876e5a55d46a7d02525a9a4e19d473c9a0b29f5a499
+
 matrix:
     allow_failures:
         - php: hhvm
