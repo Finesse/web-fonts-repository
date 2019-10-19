@@ -196,5 +196,8 @@ class StyleTest extends BaseTestCase
             @unlink($testDirectory.'/test-font.svg');
             @rmdir($testDirectory);
         }
+
+        $style = new Style();
+        $this->assertEquals([], $style->getFilesInDirectory(__DIR__.'/missing-directory'));
     }
 }
