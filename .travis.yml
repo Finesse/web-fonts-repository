@@ -28,14 +28,14 @@ install:
     - chmod +x ./cc-test-reporter
 
 before_script:
-    - ./cc-test-reporter before-build
+    - if [[ ${TRAVIS_PHP_VERSION:0:3} = 7.0 ]]; then ./cc-test-reporter before-build; fi
 
 script:
     # Report must be here, otherwise Code Climate won't find it
     - php vendor/bin/phpunit --coverage-text --coverage-clover ./clover.xml
 
 after_script:
-    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - if [[ ${TRAVIS_PHP_VERSION:0:3} = 7.0 ]]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
 
 notifications:
     email: false
