@@ -6,14 +6,11 @@ use Src\Helpers\FileHelpers;
 use Src\Services\WebfontCSSGenerator\Exceptions\InvalidSettingsException;
 
 /**
- * Class Style
- *
  * Font style description.
  *
  * Only stores style data, doesn't provide specific logic.
  *
  * @author Finesse
- * @package Src\Services\WebfontCSSGenerator\Models
  */
 class Style
 {
@@ -156,23 +153,34 @@ class Style
      *
      * @param string|null $path A path in which the glob pattern should be applied
      * @return string[] List of files paths relative to the style directory. Without beginning slash. Reverse slashes
-     *     are replaced with direct slashes.
+     *  are replaced with direct slashes.
      */
     public function getFilesInDirectory(string $path = null): array
     {
-        $result = $this->filesList;
+        return array_merge(
+            $this->filesList,
+            $path === null ? [] : $this->getFilesFromGlob($path)
+        );
+    }
 
-        if (isset($path) && isset($this->filesGlob)) {
-            $pattern = FileHelpers::concatPath($path, $this->filesGlob);
-            $files = glob($pattern, GLOB_BRACE);
-            if ($files !== false) {
-                foreach ($files as $file) {
-                    $result[] = static::preparePath(substr($file, strlen($path)));
-                }
-            }
+    /**
+     * Collects a list of the files described by the glob pattern.
+     *
+     * @param string|null $path A path in which the glob pattern should be applied
+     * @return string[] List of files paths (passed through preparePath) relative to the style directory.
+     */
+    protected function getFilesFromGlob(string $path): array
+    {
+        if ($this->filesGlob === null) {
+            return [];
         }
 
-        return $result;
+        $pattern = FileHelpers::concatPath($path, $this->filesGlob);
+        $files = glob($pattern, GLOB_BRACE) ?: [];
+
+        return array_map(function (string $file) use ($path) {
+            return static::preparePath(substr($file, strlen($path)));
+        }, $files);
     }
 
     /**

@@ -14,7 +14,7 @@ class FileHelpersTest extends BaseTestCase
         $this->assertEquals('C:/windows\\system32', FileHelpers::concatPath(null, 'C:\\', '\\windows\\system32'));
 
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Argument 1 expected to be string or null, double given.');
+        $this->expectExceptionMessage('Argument #1 expected to be string or null, double given.');
         FileHelpers::concatPath('../fir/subdir/', 1.5, '/bar');
     }
 }

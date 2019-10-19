@@ -20,23 +20,38 @@ class FileHelpers
      */
     public static function concatPath(...$parts): string
     {
-        $result = null;
+        $parts = self::checkAndFilterPathArray($parts, 'Argument #');
+        $result = '';
+
+        foreach ($parts as $part) {
+            $result .= $result === '' ? rtrim($part, '/\\') : '/'.trim($part, '/\\');
+        }
+
+        return $result;
+    }
+
+    /**
+     * Checks the parts list for the concatPath method
+     *
+     * @param string[]|null[] $parts
+     * @param string $prefix Invalid argument error message prefix
+     * @return string[]
+     * @throws \InvalidArgumentException
+     */
+    protected static function checkAndFilterPathArray(array $parts, string $prefix = 'Part #'): array
+    {
+        $result = [];
 
         foreach ($parts as $index => $part) {
             if ($part === null) {
                 continue;
             }
             if (!is_string($part)) {
-                throw new \InvalidArgumentException('Argument '.$index.' expected to be string or null, '.gettype($part).' given.');
+                throw new \InvalidArgumentException($prefix.$index.' expected to be string or null, '.gettype($part).' given.');
             }
-
-            if ($result === null) {
-                $result = rtrim($part, '/\\');
-            } else {
-                $result .= '/'.trim($part, '/\\');
-            }
+            $result[] = $part;
         }
 
-        return $result ?? '';
+        return $result;
     }
 }

@@ -4,9 +4,8 @@
 [![Total Downloads](https://poser.pugx.org/finesse/web-fonts-repository/downloads)](https://packagist.org/packages/finesse/web-fonts-repository)
 ![PHP from Packagist](https://img.shields.io/packagist/php-v/finesse/web-fonts-repository.svg)
 [![Build Status](https://travis-ci.org/Finesse/web-fonts-repository.svg?branch=master)](https://travis-ci.org/Finesse/web-fonts-repository)
-[![Coverage Status](https://coveralls.io/repos/github/Finesse/web-fonts-repository/badge.svg?branch=master)](https://coveralls.io/github/Finesse/web-fonts-repository?branch=master)
-[![Dependency Status](https://www.versioneye.com/php/finesse:web-fonts-repository/badge)](https://www.versioneye.com/php/finesse:web-fonts-repository)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391/mini.png)](https://insight.sensiolabs.com/projects/f387a746-709a-4b33-8966-c7e9d6f17391)
+[![Maintainability](https://api.codeclimate.com/v1/badges/db0fe71d28df4626145f/maintainability)](https://codeclimate.com/github/Finesse/web-fonts-repository/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/db0fe71d28df4626145f/test_coverage)](https://codeclimate.com/github/Finesse/web-fonts-repository/test_coverage)
 
 A simple webfont hosting inspired by [Google Fonts](http://fonts.google.com).
 It runs on your server, stores and distributes webfont files and generates CSS on-the-go for embedding fonts on web pages.
