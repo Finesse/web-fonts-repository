@@ -1,0 +1,32 @@
+name: Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version: ['7.0', '7.1', '7.2', '7.3', '7.4']
+    name: Test on PHP ${{ matrix.php-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Install PHP
+        uses: shivammathur/setup-php@1.4.3
+        with:
+          php-version: ${{ matrix.php-version }}
+      - name: Install application
+        run: |
+          composer install
+          composer run-script post-create-project-cmd
+      - name: Test and publish code coverage
+        if: matrix.php-version == '7.0'
+        uses: paambaati/codeclimate-action@v2.2.1
+        env:
+          # Get it on https://codeclimate.com/repos/{repo id}/settings/test_reporter
+          CC_TEST_REPORTER_ID: 02c359b52f053b695269f876e5a55d46a7d02525a9a4e19d473c9a0b29f5a499
+        with:
+          coverageCommand: php vendor/bin/phpunit --coverage-text --coverage-clover ./clover.xml
+      - name: Test
+        if: matrix.php-version != '7.0'
+        run: php vendor/bin/phpunit --coverage-text
