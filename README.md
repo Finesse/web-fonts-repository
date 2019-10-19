@@ -71,7 +71,7 @@ Otherwise some browsers will reject using fonts from the repository.
 
 ### Setup
 
-Put your font files (woff, woff2, ttf, eot, svg) to the `public/fonts` directory. You may separate them by subdirectories.
+Put your font files (woff, woff2, ttf, otf, eot, svg) to the `public/fonts` directory. You may separate them by subdirectories.
 You can convert webfont files using [Transfonter](http://transfonter.org).
 
 All settings go to the file `config/settings-local.php`.

@@ -10,7 +10,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 
 # Some browsers require the special header
-<FilesMatch "\.(woff|woff2|ttf|eot|svg)$">
+<FilesMatch "\.(woff|woff2|ttf|otf|eot|svg)$">
 	<IfModule mod_headers.c>
 		Header set Access-Control-Allow-Origin "*"
 	</IfModule>

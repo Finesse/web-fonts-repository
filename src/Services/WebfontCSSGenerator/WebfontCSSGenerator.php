@@ -191,6 +191,9 @@ class WebfontCSSGenerator
         if (isset($files['ttf'])) {
             $sources[] = "url(".CSSHelpers::formatString($files['ttf']).") format('truetype')";
         }
+        if (isset($files['otf'])) {
+            $sources[] = "url(".CSSHelpers::formatString($files['otf']).") format('opentype')";
+        }
         if (isset($files['svg'])) {
             $sources[] = "url(".CSSHelpers::formatString($files['svg'].'#webfontregular').") format('svg')";
         }

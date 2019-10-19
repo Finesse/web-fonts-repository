@@ -35,7 +35,8 @@ class WebfontCSSGeneratorTest extends BaseTestCase
                             'opensans_italic.ttf',
                             'opensans_italic.woff',
                             'opensans_italic.woff2',
-                            'opensans_italic.svg'
+                            'opensans_italic.svg',
+                            'opensans_italic.otf'
                         ]
                     ],
                     '700' => [
@@ -45,7 +46,8 @@ class WebfontCSSGeneratorTest extends BaseTestCase
                             'opensans_bold.ttf',
                             'opensans_bold.woff',
                             'opensans_bold.woff2',
-                            'opensans_bold.svg'
+                            'opensans_bold.svg',
+                            'opensans_bold.otf'
                         ]
                     ],
                     '500' => [
@@ -55,7 +57,8 @@ class WebfontCSSGeneratorTest extends BaseTestCase
                             'opensans_demi.ttf',
                             'opensans_demi.woff',
                             'opensans_demi.woff2',
-                            'opensans_demi.svg'
+                            'opensans_demi.svg',
+                            'opensans_demi.otf'
                         ]
                     ]
                 ]
@@ -91,14 +94,14 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-weight: 400;
 	font-style: italic;
 	src: url('/generator/fonts/OpenSans/opensans_italic.eot');
-	src: local('Open Sans Italic'), local('OpenSans-Italic'), url('/generator/fonts/OpenSans/opensans_italic.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_italic.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_italic.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_italic.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_italic.svg#webfontregular') format('svg');
+	src: local('Open Sans Italic'), local('OpenSans-Italic'), url('/generator/fonts/OpenSans/opensans_italic.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_italic.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_italic.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_italic.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_italic.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_italic.svg#webfontregular') format('svg');
 }
 @font-face {
 	font-family: 'Open Sans';
 	font-weight: 700;
 	font-style: normal;
 	src: url('/generator/fonts/OpenSans/opensans_bold.eot');
-	src: url('/generator/fonts/OpenSans/opensans_bold.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_bold.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_bold.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_bold.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_bold.svg#webfontregular') format('svg');
+	src: url('/generator/fonts/OpenSans/opensans_bold.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_bold.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_bold.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_bold.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_bold.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_bold.svg#webfontregular') format('svg');
 }
 @font-face {
 	font-family: 'Roboto';
@@ -123,14 +126,14 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-weight: 400;
 	font-style: italic;
 	src: url('/generator/fonts/OpenSans/opensans_italic.eot');
-	src: local('Open Sans Italic'), local('OpenSans-Italic'), url('/generator/fonts/OpenSans/opensans_italic.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_italic.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_italic.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_italic.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_italic.svg#webfontregular') format('svg');
+	src: local('Open Sans Italic'), local('OpenSans-Italic'), url('/generator/fonts/OpenSans/opensans_italic.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_italic.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_italic.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_italic.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_italic.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_italic.svg#webfontregular') format('svg');
 }
 @font-face {
 	font-family: 'Open Sans';
 	font-weight: 500;
 	font-style: normal;
 	src: url('/generator/fonts/OpenSans/opensans_demi.eot');
-	src: local('Open Sans DemiBold'), local('OpenSans-DemiBold'), url('/generator/fonts/OpenSans/opensans_demi.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_demi.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_demi.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_demi.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_demi.svg#webfontregular') format('svg');
+	src: local('Open Sans DemiBold'), local('OpenSans-DemiBold'), url('/generator/fonts/OpenSans/opensans_demi.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_demi.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_demi.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_demi.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_demi.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_demi.svg#webfontregular') format('svg');
 }
 @font-face {
 	font-family: 'Roboto';

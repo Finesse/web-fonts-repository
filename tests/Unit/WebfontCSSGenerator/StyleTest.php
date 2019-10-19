@@ -17,6 +17,7 @@ class StyleTest extends BaseTestCase
             'files' => [
                 '\\subdir\\font_medium.eot',
                 '\\subdir\\font_medium.ttf',
+                '\\subdir\\font_medium.otf',
                 '\\subdir\\font_medium.woff',
                 '\\subdir\\font_medium.woff2',
                 '\\subdir\\font_medium.svg'
@@ -31,6 +32,7 @@ class StyleTest extends BaseTestCase
             'filesList' => [
                 'subdir/font_medium.eot',
                 'subdir/font_medium.ttf',
+                'subdir/font_medium.otf',
                 'subdir/font_medium.woff',
                 'subdir/font_medium.woff2',
                 'subdir/font_medium.svg'
@@ -166,6 +168,7 @@ class StyleTest extends BaseTestCase
             $testDirectory = __DIR__.'/../../../public/fonts/__temp-for-test';
             mkdir($testDirectory);
             touch($testDirectory.'/test-font.ttf');
+            touch($testDirectory.'/test-font.otf');
             touch($testDirectory.'/test-font.woff2');
             touch($testDirectory.'/test-font.eot');
             touch($testDirectory.'/test-font.svg');
@@ -180,12 +183,14 @@ class StyleTest extends BaseTestCase
                 'demo-demo.svg',
                 'fubar.woff',
                 'test-font.ttf',
+                'test-font.otf',
                 'test-font.woff2',
                 'test-font.eot',
                 'test-font.svg'
             ], $style->getFilesInDirectory($testDirectory), '', 0.0, 10, true);
         } finally {
             @unlink($testDirectory.'/test-font.ttf');
+            @unlink($testDirectory.'/test-font.otf');
             @unlink($testDirectory.'/test-font.woff2');
             @unlink($testDirectory.'/test-font.eot');
             @unlink($testDirectory.'/test-font.svg');
