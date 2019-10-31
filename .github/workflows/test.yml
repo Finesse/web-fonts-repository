@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Install PHP
-        uses: shivammathur/setup-php@1.4.3
+        uses: shivammathur/setup-php@1.4.4
         with:
           php-version: ${{ matrix.php-version }}
           extension-csv: dom, mbstring
@@ -25,13 +25,14 @@ jobs:
           composer run-script post-create-project-cmd
       - name: Test and publish code coverage
         if: matrix.report-coverage
-        uses: paambaati/codeclimate-action@v2.2.1
+        uses: paambaati/codeclimate-action@v2.3.0
         env:
           # Get it on https://codeclimate.com/repos/{repo id}/settings/test_reporter
           CC_TEST_REPORTER_ID: 02c359b52f053b695269f876e5a55d46a7d02525a9a4e19d473c9a0b29f5a499
         with:
           # The report file must be there, otherwise Code Climate won't find it
           coverageCommand: php vendor/bin/phpunit --coverage-text --coverage-clover ./clover.xml
+          debug: true
       - name: Test
         if: "!matrix.report-coverage"
         run: php vendor/bin/phpunit --coverage-text
