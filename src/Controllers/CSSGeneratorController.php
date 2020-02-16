@@ -60,7 +60,8 @@ class CSSGeneratorController
             return $this->createErrorResponse('The app settings are invalid: '.$error->getMessage(), 500);
         }
         try {
-            $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts);
+            $displaySwap = isset($requestParams['display']) ? $requestParams['display'] === 'swap' : false;
+            $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts, $displaySwap);
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
         }

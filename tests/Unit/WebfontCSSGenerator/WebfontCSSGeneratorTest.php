@@ -118,7 +118,7 @@ class WebfontCSSGeneratorTest extends BaseTestCase
         ", $generator->makeCSS([
             'Open Sans' => ['400', '400i', '700', '700i', '100', '200', '300', '800'],
             'Roboto' => ['400', '400i', '700', '700i']
-        ]));
+        ], false));
 
         $this->assertCSSEquals("
 @font-face {
@@ -127,6 +127,7 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-style: italic;
 	src: url('/generator/fonts/OpenSans/opensans_italic.eot');
 	src: local('Open Sans Italic'), local('OpenSans-Italic'), url('/generator/fonts/OpenSans/opensans_italic.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_italic.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_italic.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_italic.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_italic.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_italic.svg#webfontregular') format('svg');
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Open Sans';
@@ -134,16 +135,18 @@ class WebfontCSSGeneratorTest extends BaseTestCase
 	font-style: normal;
 	src: url('/generator/fonts/OpenSans/opensans_demi.eot');
 	src: local('Open Sans DemiBold'), local('OpenSans-DemiBold'), url('/generator/fonts/OpenSans/opensans_demi.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_demi.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_demi.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_demi.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_demi.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_demi.svg#webfontregular') format('svg');
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Roboto';
 	font-weight: 400;
 	font-style: normal;
 	src: local('Roboto Regular'), local('Roboto-Regular'), url('/generator/fonts/Roboto/roboto.woff2') format('woff2');
+	font-display: swap;
 }
         ", $generator->makeCSS([
             'Open Sans' => ['400i', '500'],
             'Roboto' => ['400', '400', '900'] // Regular style two times
-        ]));
+        ], true));
     }
 }

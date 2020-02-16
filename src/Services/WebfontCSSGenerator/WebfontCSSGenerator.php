@@ -90,15 +90,16 @@ class WebfontCSSGenerator
      *      'Roboto'    => ['100', '100i', '400', '400i']
      *  ]
      * </pre>
+     * @param bool $displaySwap
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function makeCSS(array $requestedFamilies): string
+    public function makeCSS(array $requestedFamilies, bool $displaySwap): string
     {
         $cssCode = '';
 
         foreach ($requestedFamilies as $fontName => $styles) {
-            $cssCode .= $this->makeFontFamilyCSS($fontName, $styles);
+            $cssCode .= $this->makeFontFamilyCSS($fontName, $styles, $displaySwap);
         }
 
         return $cssCode;
@@ -120,10 +121,11 @@ class WebfontCSSGenerator
      *
      * @param string $name Family name
      * @param string[] $styles Font styles. The styles must have format `[0-9]+i?`.
+     * @param bool $displaySwap Enable font-display css properties to `swap`. Default value is `false`
      * @return string
      * @throws \InvalidArgumentException
      */
-    protected function makeFontFamilyCSS(string $name, array $styles = ['400']): string
+    protected function makeFontFamilyCSS(string $name, array $styles = ['400'], bool $displaySwap = false): string
     {
         $cssCode = '';
         $readyStyles = [];
@@ -133,7 +135,7 @@ class WebfontCSSGenerator
                 continue;
             }
 
-            $styleCssCode = $this->makeFontStyleCSS($name, $style);
+            $styleCssCode = $this->makeFontStyleCSS($name, $style, $displaySwap);
             if ($styleCssCode !== '') {
                 $cssCode .= $styleCssCode."\n";
             }
@@ -149,10 +151,11 @@ class WebfontCSSGenerator
      *
      * @param string $familyName Font family name
      * @param string $styleName Font style. The styles must have format `[0-9]+i?`.
+     * @param bool $displaySwap Enable font-display css properties to `swap`
      * @return string
      * @throws \InvalidArgumentException
      */
-    protected function makeFontStyleCSS(string $familyName, string $styleName): string
+    protected function makeFontStyleCSS(string $familyName, string $styleName, bool $displaySwap): string
     {
         // Does the given family exist?
         $family = $this->getFontFamily($familyName);
@@ -204,6 +207,7 @@ class WebfontCSSGenerator
             . "\tfont-style: ".($style->isItalic ? 'italic' : 'normal').";\n"
             . (isset($files['eot']) ? "\tsrc: url(".CSSHelpers::formatString($files['eot']).");\n" : '')
             . "\tsrc: ".implode(', ', $sources).";\n"
+            . ($displaySwap ? "\tfont-display: swap;\n" : "")
             . "}";
     }
 

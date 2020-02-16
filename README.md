@@ -153,6 +153,11 @@ body {
 }
 ```
 
+You can set use reserve fonts before custom fonts will full download. For this, set 'display' parameter to 'swap' into url. As example:
+
+```html
+<link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans:400,400i,700&display=swap" />
+```
 
 ## Versions compatibility
 
