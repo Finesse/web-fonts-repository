@@ -59,9 +59,13 @@ class CSSGeneratorController
             $this->container->get('logger')->error($error);
             return $this->createErrorResponse('The app settings are invalid: '.$error->getMessage(), 500);
         }
+
         try {
-            $displaySwap = isset($requestParams['display']) ? $requestParams['display'] === 'swap' : false;
-            $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts, $displaySwap);
+            $fontDisplay = null;
+            if (isset($requestParams['display'])) {
+                $fontDisplay = $this->checkFontDisplay($requestParams['display']);
+            }
+            $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts, $fontDisplay);
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
         }
@@ -113,6 +117,32 @@ class CSSGeneratorController
         }
 
         return $result;
+    }
+
+    /**
+     * Check font-display value. Value must be one of: auto, block, swap, fallback, optional.
+     *
+     * @param string|null $fontDisplay Font-display value or null
+     * @return string|null Valid font-display css value, or null, if $fontDisplay is null or empty.
+     * @throws \InvalidArgumentException If the parameter set, but has not valid value. The message may be sent
+     *          back to the client.
+     */
+    protected function checkFontDisplay(string $fontDisplay): string
+    {
+        if (!isset($fontDisplay) || $fontDisplay === '') {
+            return null;
+        }
+        $validFontDisplayValues = [
+            'auto',
+            'block',
+            'swap',
+            'fallback',
+            'optional'
+        ];
+        if (!array_search($fontDisplay, $validFontDisplayValues)) {
+            throw new \InvalidArgumentException('Invalid font display value');
+        }
+        return $fontDisplay;
     }
 
     /**
