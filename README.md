@@ -153,7 +153,8 @@ body {
 }
 ```
 
-You can set use reserve fonts before custom fonts will full download. For this, set 'display' parameter to 'swap' into url. As example:
+You can specify a value for the font-display property. To do this, add the display parameter to the request and set its value. 
+The value can be one of: auto, block, swap, fallback, optional.
 
 ```html
 <link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans:400,400i,700&display=swap" />
