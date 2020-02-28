@@ -37,11 +37,14 @@ class CssGeneratorTest extends FunctionalTestCase
         $container = $app->getContainer();
         $container['webfontCSSGenerator'] = function () {
             $generator = \Mockery::mock(WebfontCSSGenerator::class);
-            $generator->shouldReceive('makeCSS')->once()->andThrow(new \InvalidArgumentException('test'));
+            $generator->shouldReceive('makeCSS')->times(4)->andThrow(new \InvalidArgumentException('test'));
             return $generator;
         };
 
         $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans:400,700')->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans:400,700', ['display' => 1])->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans:400,700', ['display' => []])->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans:400,700', ['display' => false])->getStatusCode());
     }
 
     /**

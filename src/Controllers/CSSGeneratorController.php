@@ -45,8 +45,11 @@ class CSSGeneratorController
         if (!isset($requestParams['family'])) {
             return $this->createErrorResponse('The `family` query parameter is not set');
         }
+
+
         try {
             $requestedFonts = $this->parseFamilyParameter($requestParams['family']);
+            $fontDisplay = isset($requestParams['display']) ? $this->checkFontDisplay($requestParams['display']) : null;
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
         }
@@ -61,10 +64,6 @@ class CSSGeneratorController
         }
 
         try {
-            $fontDisplay = null;
-            if (isset($requestParams['display'])) {
-                $fontDisplay = $this->checkFontDisplay($requestParams['display']);
-            }
             $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts, $fontDisplay);
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
@@ -132,14 +131,7 @@ class CSSGeneratorController
         if (!isset($fontDisplay) || $fontDisplay === '') {
             return null;
         }
-        $validFontDisplayValues = [
-            'auto',
-            'block',
-            'swap',
-            'fallback',
-            'optional'
-        ];
-        if (!array_search($fontDisplay, $validFontDisplayValues)) {
+        if (!is_string($fontDisplay)) {
             throw new \InvalidArgumentException('Invalid font display value');
         }
         return $fontDisplay;
