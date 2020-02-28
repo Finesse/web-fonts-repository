@@ -32,6 +32,7 @@ class CssGeneratorTest extends FunctionalTestCase
         $this->assertEquals(422, $this->runApp('GET', '/css?family=|Open+Sans:400,700')->getStatusCode());
         $this->assertEquals(422, $this->runApp('GET', '/css?family=:400,700')->getStatusCode());
         $this->assertEquals(422, $this->runApp('GET', '/css')->getStatusCode());
+        $this->assertEquals(422, $this->runApp('GET', '/css?family=Open+Sans:400,700&display[]=bad')->getStatusCode());
 
         $app = $this->makeApp();
         $container = $app->getContainer();

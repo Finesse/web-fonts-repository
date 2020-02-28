@@ -121,12 +121,12 @@ class CSSGeneratorController
     /**
      * Check font-display value. Value must be one of: auto, block, swap, fallback, optional.
      *
-     * @param string|null $fontDisplay Font-display value or null
+     * @param $fontDisplay Font-display value or null
      * @return string|null Valid font-display css value, or null, if $fontDisplay is null or empty.
      * @throws \InvalidArgumentException If the parameter set, but has not valid value. The message may be sent
      *          back to the client.
      */
-    protected function checkFontDisplay(string $fontDisplay): string
+    protected function checkFontDisplay($fontDisplay): string
     {
         if (!isset($fontDisplay) || $fontDisplay === '') {
             return null;
