@@ -13,27 +13,81 @@ class CssGeneratorTest extends FunctionalTestCase
      */
     public function testHeaders()
     {
-        $response = $this->runApp('GET', '/css?family=Open+Sans:400,700');
+        $response = $this->runApp('GET', '/css?family=Open+Sans');
 
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertTrue((bool)preg_match('~^text/css(;|$)~', $response->getHeaderLine('Content-Type')));
         $this->assertTrue($response->hasHeader('Cache-Control'));
         $this->assertTrue($response->hasHeader('Pragma'));
-
-        $this->assertEquals(200, $this->runApp('GET', '/css?family=Open+Sans')->getStatusCode());
     }
 
     /**
-     * Tests that the route returns an client error status with bad requests
+     * Test the controller `family` parameter parsing
      */
-    public function testBadRequests()
+    public function testFamilyParsing()
     {
-        $this->assertEquals(422, $this->runApp('GET', '/css?family=')->getStatusCode());
-        $this->assertEquals(422, $this->runApp('GET', '/css?family=|Open+Sans:400,700')->getStatusCode());
-        $this->assertEquals(422, $this->runApp('GET', '/css?family=:400,700')->getStatusCode());
-        $this->assertEquals(422, $this->runApp('GET', '/css')->getStatusCode());
-        $this->assertEquals(422, $this->runApp('GET', '/css?family=Open+Sans:400,700&display[]=bad')->getStatusCode());
+        $app = $this->makeApp();
+        $container = $app->getContainer();
+        $container['webfontCSSGenerator'] = function () {
+            $generator = \Mockery::mock(WebfontCSSGenerator::class);
+            $generator->shouldReceive('makeCSS')
+                ->once()
+                ->with(['Roboto' => ['400']], '')
+                ->andReturn('');
+            $generator->shouldReceive('makeCSS')
+                ->once()
+                ->with([
+                    'Open Sans' => ['400'],
+                    'Roboto' => ['400', '400i', '700i'],
+                ], '')
+                ->andReturn('');
+            return $generator;
+        };
 
+        $this->assertEquals(200, $this->runSpecificApp($app, 'GET', '/css?family=Roboto')->getStatusCode());
+        $this->assertEquals(200, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans|Roboto:400,400i,700i')->getStatusCode());
+
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=')->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=|Open+Sans:400,700')->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=:400,700')->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css')->getStatusCode());
+    }
+
+    /**
+     * Test the controller `display` parameter parsing
+     */
+    public function testDisplayParsing()
+    {
+        $app = $this->makeApp();
+        $container = $app->getContainer();
+        $container['webfontCSSGenerator'] = function () {
+            $generator = \Mockery::mock(WebfontCSSGenerator::class);
+            $generator->shouldReceive('makeCSS')
+                ->once()
+                ->with(['Open Sans' => ['400']], '')
+                ->andReturn('');
+            $generator->shouldReceive('makeCSS')
+                ->once()
+                ->with(['Open Sans' => ['400']], '')
+                ->andReturn('');
+            $generator->shouldReceive('makeCSS')
+                ->once()
+                ->with(['Open Sans' => ['400']], 'swap')
+                ->andReturn('');
+            return $generator;
+        };
+
+        $this->assertEquals(200, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans')->getStatusCode());
+        $this->assertEquals(200, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans&display=')->getStatusCode());
+        $this->assertEquals(200, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans&display=swap')->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans&display[]=bad')->getStatusCode());
+    }
+
+    /**
+     * Test handling errors from webfontCSSGenerator
+     */
+    public function testGeneratorInputError()
+    {
         $app = $this->makeApp();
         $container = $app->getContainer();
         $container['webfontCSSGenerator'] = function () {
@@ -42,7 +96,7 @@ class CssGeneratorTest extends FunctionalTestCase
             return $generator;
         };
 
-        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans:400,700')->getStatusCode());
+        $this->assertEquals(422, $this->runSpecificApp($app, 'GET', '/css?family=Open+Sans')->getStatusCode());
     }
 
     /**

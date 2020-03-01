@@ -89,7 +89,7 @@ class CSSGeneratorController
      *  ]
      * </pre>
      * @throws \InvalidArgumentException If the parameter value is formatted badly. The message may be sent back to the
-     *     client.
+     *  client.
      */
     protected function parseFamilyParameter(string $value): array
     {
@@ -121,8 +121,8 @@ class CSSGeneratorController
      *
      * @param mixed $fontDisplay Parameter value
      * @return string Valid font-display css value, or empty string, if $fontDisplay is null or empty.
-     * @throws \InvalidArgumentException If the parameter set, but has not valid value. The message may be sent
-     *          back to the client.
+     * @throws \InvalidArgumentException If the parameter set, but has not valid value. The message may be sent back to
+     *  the client.
      */
     protected function parseDisplayParameter($fontDisplay): string
     {
