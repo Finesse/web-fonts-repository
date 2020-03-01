@@ -94,7 +94,7 @@ class WebfontCSSGenerator
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function makeCSS(array $requestedFamilies, string $fontDisplay = null): string
+    public function makeCSS(array $requestedFamilies, string $fontDisplay = ''): string
     {
         $cssCode = '';
 
@@ -121,11 +121,11 @@ class WebfontCSSGenerator
      *
      * @param string $name Family name
      * @param string[] $styles Font styles. The styles must have format `[0-9]+i?`.
-     * @param string|null $fontDisplay Font-display css property value
+     * @param string $fontDisplay Font-display css property value
      * @return string
      * @throws \InvalidArgumentException
      */
-    protected function makeFontFamilyCSS(string $name, array $styles = ['400'], string $fontDisplay = null): string
+    protected function makeFontFamilyCSS(string $name, array $styles = ['400'], string $fontDisplay = ''): string
     {
         $cssCode = '';
         $readyStyles = [];
@@ -155,7 +155,7 @@ class WebfontCSSGenerator
      * @return string
      * @throws \InvalidArgumentException
      */
-    protected function makeFontStyleCSS(string $familyName, string $styleName, string $fontDisplay = null): string
+    protected function makeFontStyleCSS(string $familyName, string $styleName, string $fontDisplay = ''): string
     {
         // Does the given family exist?
         $family = $this->getFontFamily($familyName);
