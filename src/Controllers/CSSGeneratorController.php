@@ -45,8 +45,10 @@ class CSSGeneratorController
         if (!isset($requestParams['family'])) {
             return $this->createErrorResponse('The `family` query parameter is not set');
         }
+
         try {
             $requestedFonts = $this->parseFamilyParameter($requestParams['family']);
+            $fontDisplay = $this->parseDisplayParameter($requestParams['display'] ?? null);
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
         }
@@ -60,7 +62,7 @@ class CSSGeneratorController
             return $this->createErrorResponse('The app settings are invalid: '.$error->getMessage(), 500);
         }
         try {
-            $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts);
+            $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts, $fontDisplay);
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
         }
@@ -87,7 +89,7 @@ class CSSGeneratorController
      *  ]
      * </pre>
      * @throws \InvalidArgumentException If the parameter value is formatted badly. The message may be sent back to the
-     *     client.
+     *  client.
      */
     protected function parseFamilyParameter(string $value): array
     {
@@ -112,6 +114,25 @@ class CSSGeneratorController
         }
 
         return $result;
+    }
+
+    /**
+     * Checks `display` request query value.
+     *
+     * @param mixed $fontDisplay Parameter value
+     * @return string Valid font-display css value, or empty string, if $fontDisplay is null or empty.
+     * @throws \InvalidArgumentException If the parameter set, but has not valid value. The message may be sent back to
+     *  the client.
+     */
+    protected function parseDisplayParameter($fontDisplay): string
+    {
+        if ($fontDisplay === null) {
+            return '';
+        }
+        if (!is_string($fontDisplay)) {
+            throw new \InvalidArgumentException('Invalid font display value');
+        }
+        return $fontDisplay;
     }
 
     /**

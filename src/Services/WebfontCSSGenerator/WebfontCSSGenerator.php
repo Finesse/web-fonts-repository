@@ -90,15 +90,16 @@ class WebfontCSSGenerator
      *      'Roboto'    => ['100', '100i', '400', '400i']
      *  ]
      * </pre>
+     * @param string $fontDisplay Font-display css property
      * @return string
      * @throws \InvalidArgumentException
      */
-    public function makeCSS(array $requestedFamilies): string
+    public function makeCSS(array $requestedFamilies, string $fontDisplay = ''): string
     {
         $cssCode = '';
 
         foreach ($requestedFamilies as $fontName => $styles) {
-            $cssCode .= $this->makeFontFamilyCSS($fontName, $styles);
+            $cssCode .= $this->makeFontFamilyCSS($fontName, $styles, $fontDisplay);
         }
 
         return $cssCode;
@@ -120,10 +121,11 @@ class WebfontCSSGenerator
      *
      * @param string $name Family name
      * @param string[] $styles Font styles. The styles must have format `[0-9]+i?`.
+     * @param string $fontDisplay Font-display css property value
      * @return string
      * @throws \InvalidArgumentException
      */
-    protected function makeFontFamilyCSS(string $name, array $styles = ['400']): string
+    protected function makeFontFamilyCSS(string $name, array $styles = ['400'], string $fontDisplay = ''): string
     {
         $cssCode = '';
         $readyStyles = [];
@@ -133,7 +135,7 @@ class WebfontCSSGenerator
                 continue;
             }
 
-            $styleCssCode = $this->makeFontStyleCSS($name, $style);
+            $styleCssCode = $this->makeFontStyleCSS($name, $style, $fontDisplay);
             if ($styleCssCode !== '') {
                 $cssCode .= $styleCssCode."\n";
             }
@@ -149,10 +151,11 @@ class WebfontCSSGenerator
      *
      * @param string $familyName Font family name
      * @param string $styleName Font style. The styles must have format `[0-9]+i?`.
+     * @param string $fontDisplay Font-display css property value
      * @return string
      * @throws \InvalidArgumentException
      */
-    protected function makeFontStyleCSS(string $familyName, string $styleName): string
+    protected function makeFontStyleCSS(string $familyName, string $styleName, string $fontDisplay = ''): string
     {
         // Does the given family exist?
         $family = $this->getFontFamily($familyName);
@@ -202,6 +205,7 @@ class WebfontCSSGenerator
             . "\tfont-family: ".CSSHelpers::formatString($family->name).";\n"
             . "\tfont-weight: $style->weight;\n"
             . "\tfont-style: ".($style->isItalic ? 'italic' : 'normal').";\n"
+            . ($fontDisplay !== '' ? "\tfont-display: $fontDisplay;\n" : '')
             . (isset($files['eot']) ? "\tsrc: url(".CSSHelpers::formatString($files['eot']).");\n" : '')
             . "\tsrc: ".implode(', ', $sources).";\n"
             . "}";

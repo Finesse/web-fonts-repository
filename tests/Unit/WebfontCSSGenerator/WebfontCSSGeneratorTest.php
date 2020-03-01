@@ -145,5 +145,26 @@ class WebfontCSSGeneratorTest extends BaseTestCase
             'Open Sans' => ['400i', '500'],
             'Roboto' => ['400', '400', '900'] // Regular style two times
         ]));
+
+        $this->assertCSSEquals("
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+	src: url('/generator/fonts/OpenSans/opensans_italic.eot');
+	src: local('Open Sans Italic'), local('OpenSans-Italic'), url('/generator/fonts/OpenSans/opensans_italic.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_italic.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_italic.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_italic.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_italic.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_italic.svg#webfontregular') format('svg');
+}
+@font-face {
+	font-family: 'Open Sans';
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+	src: url('/generator/fonts/OpenSans/opensans_demi.eot');
+	src: local('Open Sans DemiBold'), local('OpenSans-DemiBold'), url('/generator/fonts/OpenSans/opensans_demi.eot?#iefix') format('embedded-opentype'), url('/generator/fonts/OpenSans/opensans_demi.woff2') format('woff2'), url('/generator/fonts/OpenSans/opensans_demi.woff') format('woff'), url('/generator/fonts/OpenSans/opensans_demi.ttf') format('truetype'), url('/generator/fonts/OpenSans/opensans_demi.otf') format('opentype'), url('/generator/fonts/OpenSans/opensans_demi.svg#webfontregular') format('svg');
+}
+        ", $generator->makeCSS([
+            'Open Sans' => ['400i', '500']
+        ], 'swap'));
     }
 }
