@@ -90,7 +90,7 @@ class WebfontCSSGenerator
      *      'Roboto'    => ['100', '100i', '400', '400i']
      *  ]
      * </pre>
-     * @param string|null $fontDisplay Font-display css property
+     * @param string $fontDisplay Font-display css property
      * @return string
      * @throws \InvalidArgumentException
      */
@@ -201,18 +201,13 @@ class WebfontCSSGenerator
             $sources[] = "url(".CSSHelpers::formatString($files['svg'].'#webfontregular').") format('svg')";
         }
 
-        $fontDisplayCSS = '';
-        if (isset($fontDisplay) && $fontDisplay !== '') {
-            $fontDisplayCSS = "\tfont-display: " . $fontDisplay . ";\n";
-        }
-
         return "@font-face {\n"
             . "\tfont-family: ".CSSHelpers::formatString($family->name).";\n"
             . "\tfont-weight: $style->weight;\n"
             . "\tfont-style: ".($style->isItalic ? 'italic' : 'normal').";\n"
+            . ($fontDisplay !== '' ? "\tfont-display: $fontDisplay;\n" : '')
             . (isset($files['eot']) ? "\tsrc: url(".CSSHelpers::formatString($files['eot']).");\n" : '')
             . "\tsrc: ".implode(', ', $sources).";\n"
-            . $fontDisplayCSS
             . "}";
     }
 

@@ -145,19 +145,19 @@ You may omit the styles list. In this case the regular style (`400`) is used.
 <link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans" />
 ```
 
+You can specify a value for the [font-display](https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display)
+style property using `display` parameter. Example:
+
+```html
+<link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans&display=swap" />
+```
+
 Then embed a font in a CSS code:
 
 ```css
 body {
     font-family: 'Open Sans', sans-serif;
 }
-```
-
-You can specify a value for the font-display property. To do this, add the display parameter to the request and set its value. 
-The value can be one of: auto, block, swap, fallback, optional.
-
-```html
-<link rel="stylesheet" href="http://web-fonts-repository.local/css?family=Open+Sans:400,400i,700&display=swap" />
 ```
 
 ## Versions compatibility

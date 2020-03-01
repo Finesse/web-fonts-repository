@@ -46,10 +46,9 @@ class CSSGeneratorController
             return $this->createErrorResponse('The `family` query parameter is not set');
         }
 
-
         try {
             $requestedFonts = $this->parseFamilyParameter($requestParams['family']);
-            $fontDisplay = isset($requestParams['display']) ? $this->checkFontDisplay($requestParams['display']) : '';
+            $fontDisplay = $this->parseDisplayParameter($requestParams['display'] ?? null);
         } catch (\InvalidArgumentException $error) {
             return $this->createErrorResponse($error->getMessage());
         }
@@ -62,7 +61,6 @@ class CSSGeneratorController
             $this->container->get('logger')->error($error);
             return $this->createErrorResponse('The app settings are invalid: '.$error->getMessage(), 500);
         }
-
         try {
             $cssCode = $webfontCSSGenerator->makeCSS($requestedFonts, $fontDisplay);
         } catch (\InvalidArgumentException $error) {
@@ -119,16 +117,16 @@ class CSSGeneratorController
     }
 
     /**
-     * Check font-display value. Value must be one of: auto, block, swap, fallback, optional.
+     * Checks `display` request query value.
      *
-     * @param $fontDisplay Font-display value or null
+     * @param mixed $fontDisplay Parameter value
      * @return string Valid font-display css value, or empty string, if $fontDisplay is null or empty.
      * @throws \InvalidArgumentException If the parameter set, but has not valid value. The message may be sent
      *          back to the client.
      */
-    protected function checkFontDisplay($fontDisplay): string
+    protected function parseDisplayParameter($fontDisplay): string
     {
-        if (!isset($fontDisplay) || $fontDisplay === '') {
+        if ($fontDisplay === null) {
             return '';
         }
         if (!is_string($fontDisplay)) {
