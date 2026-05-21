@@ -15,10 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Install PHP
-        uses: shivammathur/setup-php@1.4.4
+        uses: shivammathur/setup-php@2.37.1
         with:
           php-version: ${{ matrix.php-version }}
-          extension-csv: dom, mbstring
+          extensions: dom, mbstring
       - name: Install application
         run: |
           composer install
